@@ -1,5 +1,21 @@
 .wrapper {
-  width: 1250px;
-  height: 100px;
+  width: 100%;
+  min-height: 100px;
+  background: #F4EBDC;
+
+  margin-right: 20px;
+  padding: 25px 25px 25px 50px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+
+  font-family: Playfair Display, serif;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 39.99px;
+  text-align: left;
 
 }

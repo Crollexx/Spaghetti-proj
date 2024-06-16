@@ -3,37 +3,39 @@ import styles from './styles.module.scss'
 import ListNotification, {IListNotificationProps} from "../listNotification/listNotification";
 import ListFilters, {IListFiltersProps} from "../listFilters/listFilters";
 import ListItem from "../listItem/listItem";
+import {IOrder} from "../../types/order";
 
-interface IDefaultDataItem {
-  id: number
-  title: string
-}
-interface IDefaultListBaseProps<T> {
-  data: (IDefaultDataItem & T)[]
-}
-interface IWithFilters<T> extends IDefaultListBaseProps<T>, IListFiltersProps{
-  showFilters: boolean
-  onSelectFilter: () => void
-  onClearFilter: () => void
+interface IDefaultListBaseProps {
+  data: IOrder[]
 }
 
-interface IDefaultListWithNotification<T> extends IDefaultListBaseProps<T>, IListNotificationProps{
-  showNotification: boolean
-  orderID: number
-}
+interface IWithFilters extends IDefaultListBaseProps, IListFiltersProps{}
 
+interface IDefaultListWithNotification extends IDefaultListBaseProps, IListNotificationProps{}
+
+type DefaultListPropsType = IWithFilters | IDefaultListWithNotification
 
 // @ts-ignore
-const DefaultList = <T,>({ data, showFilters, showNotification, orderID, onSelectFilter, onClearFilter }: (IDefaultListBaseProps<T> | IWithFilters<T> | IDefaultListWithNotification<T>)) => {
+const DefaultList: React.FC<DefaultListPropsType> = ({ data, notificationText, onSelectFilter, onClearFilter }) => {
+
+  const showNotification = !!notificationText
+  const showFilters = !!onClearFilter && !!onSelectFilter
+
+  const preparedListClassName = `${styles.list} ${(data?.length > 3) ? styles.scroll : ''}`
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.header}>
-        <ListNotification showNotification={showNotification} orderID={orderID}/>
-        <ListFilters showFilters={showFilters} onClearFilter={onClearFilter} onSelectFilter={onSelectFilter}/>
+        {showNotification ? (
+          <ListNotification notificationText={notificationText}/>
+        ) : null}
+        {showFilters ? (
+          <ListFilters onClearFilter={onClearFilter} onSelectFilter={onSelectFilter}/>
+        ) : null}
       </div>
-      <div className={styles.list}>
-        {data?.map(({ title, id }) => (
-          <ListItem title={title} href={String(id)}/>
+      <div className={preparedListClassName}>
+        {data?.map((item) => (
+          <ListItem orderID={item.id} key={item.id} {...item}/>
         ))}
       </div>
 

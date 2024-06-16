@@ -1,3 +1,29 @@
 .wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  gap: 18px;
+
+  margin-left: auto;
+}
+
+.button {
+  min-width: 130px;
+  border-radius: 20px;
+  border: none;
+  padding: 4px 10px;
+
+  background: #F4EBDC;
+  color: black;
+
+  font-family: "Playfair Display", serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 32px;
+  text-align: center;
 
 }

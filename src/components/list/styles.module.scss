@@ -1,5 +1,5 @@
 .wrapper {
-
+  width: 100%;
 }
 
 .header {
@@ -7,4 +7,38 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+
+  padding-bottom: 32px;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  gap: 60px;
+}
+
+.scroll {
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 420px;
+
+  &::-webkit-scrollbar {
+    width: 10px;
+    direction: rtl;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
 }

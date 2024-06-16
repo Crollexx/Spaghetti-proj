@@ -2,10 +2,19 @@ import React, {useState} from 'react';
 import {IconButton, Menu, MenuItem} from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 
-interface IMenuButtonProps {
-
+export interface IListData {
+  title: string | React.ReactNode
+  value: string | number
 }
-const MenuButton: React.FC<IMenuButtonProps> = () => {
+
+interface IMenuButtonProps {
+  id: string,
+  children: React.ReactNode,
+  listData: IListData[],
+  onClick: (value: string | number) => void
+}
+
+const MenuButton: React.FC<IMenuButtonProps> = ({ id, children, listData, onClick }) => {
   
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null)
   
@@ -13,30 +22,35 @@ const MenuButton: React.FC<IMenuButtonProps> = () => {
     setAnchorEl(event.currentTarget)
   }
   
-  const handleClose = () => {
+  const handleClose = (value: string | number) => {
     setAnchorEl(null)
+    onClick(value)
   }
   
   return (
     <>
       <IconButton
-        id="basic-menu"
+        id={id}
         aria-label="menu"
         aria-controls={!!anchorEl ? 'long-menu' : undefined}
         aria-expanded={!!anchorEl ? 'true' : undefined}
         aria-haspopup="true"
         onClick={handleOpen}
       >
+        {children}
         <MenuIcon />
       </IconButton>
       <Menu
-        id="basic-menu"
+        id={id}
         anchorEl={anchorEl}
         open={!!anchorEl}
         onClose={handleClose}
       >
-        <MenuItem onClick={handleClose}>Анкеты</MenuItem>
-        <MenuItem onClick={handleClose}>Заказы</MenuItem>
+        {listData?.map(({ title,value }) => (
+          <MenuItem onClick={() => handleClose(value)}>
+            {title}
+          </MenuItem>
+        ))}
       </Menu>
     </>
   );

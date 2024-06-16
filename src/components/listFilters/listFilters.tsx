@@ -1,23 +1,19 @@
 import React from 'react';
 import styles from './styles.module.scss'
-import {Button} from "@mui/material";
 
 export interface IListFiltersProps {
-  showFilters: boolean
   onSelectFilter: () => void
   onClearFilter: () => void
 }
-const ListFilters: React.FC<IListFiltersProps> = ({ showFilters, onSelectFilter, onClearFilter }) => {
-  if (!showFilters) return null
-  
+const ListFilters: React.FC<IListFiltersProps> = ({ onSelectFilter, onClearFilter }) => {
   return (
     <div className={styles.wrapper}>
-      <Button onClick={() => onClearFilter()}>
+      <button onClick={() => onClearFilter()} className={styles.button}>
         Все
-      </Button>
-      <Button onClick={() => onSelectFilter()}>
+      </button>
+      <button onClick={() => onSelectFilter()} className={styles.button}>
         Не просмотренные
-      </Button>
+      </button>
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './'
+import styles from './styles.module.scss'
 import DefaultList from "../../../components/list/list";
 
 const ClientOrdersPage = () => {
@@ -19,9 +19,18 @@ const ClientOrdersPage = () => {
       id: 4
     },
   ]
+
   return (
-    <div className={}>
-      <DefaultList data={orders} showFilters={true}/>
+    <div className={styles.wrapper}>
+      <h3>Заказы</h3>
+      <DefaultList
+
+        // @ts-ignore
+        data={orders}
+        onSelectFilter={() => {}}
+        onClearFilter={() => {}}
+        notificationText='Клиенсткий представитель просит Вас оставить отзыв о заказе №101'
+      />
     </div>
   );
 };
