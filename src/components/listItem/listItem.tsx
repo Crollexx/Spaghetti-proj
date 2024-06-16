@@ -13,7 +13,7 @@ interface IListItemProps {
 }
 const ListItem: React.FC<IListItemProps> = ({ title, href }) => {
   
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   
   const handleClick = (link: string) => {
     navigate(link)
