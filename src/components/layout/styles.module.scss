@@ -1,0 +1,40 @@
+
+$headerHeight: 90px;
+
+.wrapper {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+.header {
+  position: sticky;
+  top: 0;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 100%;
+  height: $headerHeight;
+  padding: 20px;
+  background-color: #03B2C2;
+
+  .logo {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+  }
+}
+
+.content {
+  height: 100%;
+  max-height: calc(100vh - $headerHeight);
+
+  background-color: #CDE18F;
+  padding: 18px;
+}
+
+
+

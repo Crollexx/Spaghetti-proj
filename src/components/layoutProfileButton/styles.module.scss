@@ -1,0 +1,19 @@
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  gap: 26px;
+
+  .text {
+    //font-family: Playfair Display;
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 39.99px;
+    text-align: left;
+
+    color:  #FFFFFF;
+  }
+
+}
