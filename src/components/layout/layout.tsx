@@ -5,22 +5,18 @@ import ProfileButton from "../layoutProfileButton/profileButton";
 import {usersRoles} from "../../types/roles";
 import {useUserData} from "../../hooks/useUserData";
 import MenuIcon from "@mui/icons-material/Menu";
-import {useNavigate} from "react-router-dom";
+import {Outlet, useNavigate} from "react-router-dom";
 
-interface ILayoutProps {
-  children: React.ReactNode
-}
+const Layout: React.FC = () => {
 
-const Layout: React.FC<ILayoutProps> = ({ children }) => {
-
-  // const navigate = useNavigate()
+  const navigate = useNavigate()
   const { userRole } = useUserData()
 
   const userSelected = userRole != null
   const isBrigadier = userSelected && userRole === usersRoles.brigadier
 
   const handleNavigate = (route: string) => {
-    // navigate(route)
+    navigate(route)
   }
 
   // const handleChangeRole = () => {
@@ -30,7 +26,7 @@ const Layout: React.FC<ILayoutProps> = ({ children }) => {
   const brigadierMenuList = [
     {
       title: 'Анкеты',
-      value: '/',
+      value: '/forms',
     }, {
       title: 'Заказы',
       value: '/orders',
@@ -49,13 +45,18 @@ const Layout: React.FC<ILayoutProps> = ({ children }) => {
             <MenuIcon />
           </MenuButton>
         ) : null}
-        <img src="/logo.svg" alt='logo' className={isBrigadier ? styles.logo : ''}/>
+        <img
+          src="/logo.svg"
+          alt='logo'
+          className={styles.logo + ' ' + (isBrigadier ? styles.menu : '')}
+          onClick={() => handleNavigate('')}
+        />
         {userSelected ? (
           <ProfileButton userRole={userRole} />
         ) : null}
       </header>
       <main className={styles.content}>
-        {children}
+        <Outlet/>
       </main>
     </div>
   );

@@ -21,8 +21,8 @@ const ClientOrdersPage = () => {
   ]
 
   return (
-    <div className={styles.wrapper}>
-      <h3>Заказы</h3>
+    <>
+      <h3 className={styles.text}>Заказы</h3>
       <DefaultList
 
         // @ts-ignore
@@ -31,7 +31,7 @@ const ClientOrdersPage = () => {
         onClearFilter={() => {}}
         notificationText='Клиенсткий представитель просит Вас оставить отзыв о заказе №101'
       />
-    </div>
+    </>
   );
 };
 

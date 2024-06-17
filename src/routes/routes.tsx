@@ -1,4 +1,4 @@
-import {RouteObject} from "react-router-dom";
+import {Outlet, RouteObject} from "react-router-dom";
 import ClientOrdersPage from "../pages/clientPages/ordersPage/ordersPage";
 import ClientOrderPage from "../pages/clientPages/orderPage/orderPage";
 import ClientOrderReviewPage from "../pages/clientPages/orderReviewPage/orderReviewPage";
@@ -13,74 +13,112 @@ import TechnologistMaterialSelectionPage from "../pages/technologistPages/materi
 import TechnologistFormPage from "../pages/technologistPages/formPage/formPage";
 import CourierOrdersPage from "../pages/courierPages/ordersPage/ordersPage";
 import React from "react";
+import Layout from "../components/layout/layout";
+import ClientRepresentativeOrderPage from "../pages/clientRepresentativePages/orderPage/orderPage";
+import {useUserData} from "../hooks/useUserData";
+import {usersRoles} from "../types/roles";
+
+export const defaultRoutes = (routes: RouteObject[]): RouteObject[] => [
+  {
+    path: "/",
+    element: <Layout/>,
+    errorElement: <div>Ошибка</div>,
+    children: routes,
+  },
+]
+
 
 export const unAuthRoutes: RouteObject[] = [
   {
-    path: "/",
+    path: "error",
     element: <div>Ошибка</div>,
   },
 ]
 
 export const clientRoutes: RouteObject[] = [
   {
-    path: "/",
+    path: "order",
     element: <ClientOrdersPage/>,
-  }, {
-    path: "/:orderID",
-    element: <ClientOrderPage/>,
-  }, {
-    path: "/:orderID/review",
-    element: <ClientOrderReviewPage/>,
+    children: [
+      {
+        path: ":orderID",
+        element: <ClientOrderPage/>,
+        children: [
+          {
+            path: "review",
+            element: <ClientOrderReviewPage/>,
+          },
+        ]
+      }
+    ]
   },
 ]
 
 export const clientRepresentativeRoutes: RouteObject[] = [
   {
-    path: "/",
+    path: "orders",
     element: <ClientRepresentativeOrderReviewPage/>,
+    children: [
+      {
+        path: ":reviewID",
+        element: <ClientRepresentativeOrderPage/>,
+      },
+    ]
   },
 ]
 
 export const brigadierRoutes: RouteObject[] = [
   {
-    path: "/",
-    element: <BrigadierFormsPage/>,
-  }, {
-    path: "/:formID",
-    element: <BrigadierFormItemPage/>,
-  }, {
-    path: "/orders",
+    path: "orders",
     element: <BrigadierOrdersPage/>,
-  },
+  }, {
+    path: "forms",
+    element: <BrigadierFormsPage/>,
+    children: [
+      {
+        path: ":formID",
+        element: <BrigadierFormItemPage/>,
+      }
+    ]
+  }
 ]
 
 export const controllerRoutes: RouteObject[] = [
   {
-    path: "/",
+    path: "review",
     element: <ControllerOrdersPage/>,
-  }, {
-    path: "/:reviewID",
-    element: <ControllerOrderPage/>,
-  },
+    children: [
+      {
+        path: ":reviewID",
+        element: <ControllerOrderPage/>,
+      }
+    ]
+  }
 ]
 export const agentRoutes: RouteObject[] = [
   {
-    path: "/",
+    path: "orders",
     element: <AgentOrdersPage/>,
+    children: [
+    
+    ]
   },
 ]
 export const technologistRoutes: RouteObject[] = [
   {
-    path: "/",
+    path: "selection",
     element: <TechnologistMaterialSelectionPage/>,
-  }, {
-    path: "/:formID",
-    element: <TechnologistFormPage/>,
-  },
+    children: [
+      {
+        path: ":formID",
+        element: <TechnologistFormPage/>,
+      },
+    ]
+  }
 ]
 export const courierRoutes: RouteObject[] = [
   {
-    path: "/",
+    path: "orders",
     element: <CourierOrdersPage/>,
   },
 ]

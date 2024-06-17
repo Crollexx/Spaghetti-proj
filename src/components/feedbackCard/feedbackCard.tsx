@@ -1,8 +1,6 @@
 import React from 'react';
 
-
-const ClientOrderPage = () => {
-  
+const FeedbackCard = () => {
   return (
     <div>
     
@@ -10,4 +8,4 @@ const ClientOrderPage = () => {
   );
 };
 
-export default ClientOrderPage;
+export default FeedbackCard;

@@ -9,13 +9,12 @@ interface IUserContextProvider {
 const UserContextProvider: React.FC<IUserContextProvider> = ({ children }) => {
   const [userRole, setUserRole] = useState<null | usersRoles>(null)
 
-  console.log()
   const handleChangeUser = (value: usersRoles) => {
     setUserRole(value)
   }
 
   useEffect(() => {
-    const user = usersRoles.client
+    const user = usersRoles.brigadier
     setUserRole(user)
   }, [])
 

@@ -22,6 +22,10 @@ $headerHeight: 90px;
   background-color: #03B2C2;
 
   .logo {
+    cursor: pointer;
+  }
+
+  .menu {
     position: absolute;
     left: 50%;
     transform: translate(-50%, 0);
@@ -31,6 +35,7 @@ $headerHeight: 90px;
 .content {
   height: 100%;
   max-height: calc(100vh - $headerHeight);
+  overflow: hidden;
 
   background-color: #CDE18F;
   padding: 18px;

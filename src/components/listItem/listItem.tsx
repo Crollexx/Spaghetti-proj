@@ -3,7 +3,7 @@ import styles from './styles.module.scss'
 import ArrowForwardIosOutlinedIcon from '@mui/icons-material/ArrowForwardIosOutlined';
 import {IconButton} from "@mui/material";
 import {useNavigate} from "react-router-dom";
-import {IOrder} from "../../types/order";
+import {IOrder, orderStatuses} from "../../types/order";
 import {useUserData} from "../../hooks/useUserData";
 import {usersRoles} from "../../types/roles";
 import ListStatusBadge from "../listStatusBadge/listStatusBadge";
@@ -18,14 +18,20 @@ const ListItem: React.FC<IListItemProps> = ({
                                               showStatusIndicator,
                                               feedbackNotification,
                                               deliveryNotification,
-                                              status
+                                              status: orderStatuses2
                                             }) => {
 
   const {userRole} = useUserData()
   const navigate = useNavigate();
-
-  const showStatusNotification = false
-  const showDeliveryNotification = userRole === usersRoles.client && feedbackNotification
+  
+  const status = orderStatuses.cooking
+  
+  const showDeliveryNotification =
+    userRole === usersRoles.client && feedbackNotification
+  const showStatusNotification =
+    userRole === usersRoles.client ||
+    userRole === usersRoles.clientRepresentative ||
+    userRole === usersRoles.agent
   const showLinkButton =
     userRole === usersRoles.brigadier ||
     userRole === usersRoles.client ||
@@ -35,15 +41,15 @@ const ListItem: React.FC<IListItemProps> = ({
     )
   
   const handleClick = (link: number) => {
-    navigate(`/${link}`)
+    navigate(`${link}`)
   }
   
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.wrapper + ' ' + (showLinkButton ? styles.link : '')} onClick={() => handleClick(orderID)}>
       <span>
         №{orderID}
       </span>
-      <div>
+      <div className={styles.icons}>
         {showDeliveryNotification ? (
           <>
             </>

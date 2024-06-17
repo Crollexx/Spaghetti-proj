@@ -1,0 +1,51 @@
+.breadcrumbs {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+
+
+}
+
+.text {
+  font-family: Playfair Display, serif;
+  font-size: 30px;
+  font-weight: 900;
+  line-height: 39.99px;
+  text-align: left;
+  color: black !important;
+  text-decoration: none !important;
+}
+
+
+.buttons {
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+
+  :first-child {
+    background: #F21111;
+  }
+  :last-child {
+    background: #2DB52B;
+  }
+  button {
+    padding: 4px 48px;
+    min-width: 250px;
+    height: 54px;
+    border-radius: 20px ;
+    border: none;
+
+    font-family: Playfair Display, serif;
+    font-size: 30px;
+    font-weight: 400;
+    line-height: 39.99px;
+    text-align: center;
+    color: #FFFFFF;
+
+  }
+}
