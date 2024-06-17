@@ -14,7 +14,7 @@ const UserContextProvider: React.FC<IUserContextProvider> = ({ children }) => {
   }
 
   useEffect(() => {
-    const user = usersRoles.brigadier
+    const user = usersRoles.client
     setUserRole(user)
   }, [])
 

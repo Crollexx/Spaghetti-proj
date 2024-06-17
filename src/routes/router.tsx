@@ -2,14 +2,6 @@ import React from 'react';
 import {createBrowserRouter, Navigate, Route, RouteObject, Routes} from "react-router-dom";
 import {usersRoles} from "../types/roles";
 import {useUserData} from "../hooks/useUserData";
-import {
-  agentRoutes,
-  brigadierRoutes,
-  clientRepresentativeRoutes,
-  clientRoutes,
-  controllerRoutes, courierRoutes, defaultRoutes,
-  technologistRoutes, unAuthRoutes
-} from "./routes";
 import Layout from "../components/layout/layout";
 import BrigadierOrdersPage from "../pages/brigadierPages/ordersPage/ordersPage";
 import BrigadierFormsPage from "../pages/brigadierPages/formsPage/formsPage";
@@ -25,31 +17,33 @@ import AgentOrdersPage from "../pages/agentPages/ordersPage/ordersPage";
 import TechnologistMaterialSelectionPage from "../pages/technologistPages/materialSelectionPage/materialSelectionPage";
 import TechnologistFormPage from "../pages/technologistPages/formPage/formPage";
 import CourierOrdersPage from "../pages/courierPages/ordersPage/ordersPage";
+import {routes} from "./routes";
+import AgentOrderPage from "../pages/agentPages/orderPage/orderPage";
 
 const Router: React.FC = () => {
 
   const { userRole } = useUserData()
 
-  const getPreparedRoutes = (userID: usersRoles | null): RouteObject[] => {
-    switch (userID) {
-      case usersRoles.client:
-        return clientRoutes
-      case usersRoles.clientRepresentative:
-        return clientRepresentativeRoutes
-      case usersRoles.brigadier:
-        return brigadierRoutes
-      case usersRoles.controller:
-        return controllerRoutes
-      case usersRoles.agent:
-        return agentRoutes
-      case usersRoles.technologist:
-        return technologistRoutes
-      case usersRoles.courier:
-        return courierRoutes
-      default:
-        return unAuthRoutes
-    }
-  }
+  // const getPreparedRoutes = (userID: usersRoles | null): RouteObject[] => {
+  //   switch (userID) {
+  //     case usersRoles.client:
+  //       return clientRoutes
+  //     case usersRoles.clientRepresentative:
+  //       return clientRepresentativeRoutes
+  //     case usersRoles.brigadier:
+  //       return brigadierRoutes
+  //     case usersRoles.controller:
+  //       return controllerRoutes
+  //     case usersRoles.agent:
+  //       return agentRoutes
+  //     case usersRoles.technologist:
+  //       return technologistRoutes
+  //     case usersRoles.courier:
+  //       return courierRoutes
+  //     default:
+  //       return unAuthRoutes
+  //   }
+  // }
   // const qwe = defaultRoutes(getPreparedRoutes(userRole))
   // console.log(qwe)
   // const router = createBrowserRouter(qwe);
@@ -71,52 +65,65 @@ const Router: React.FC = () => {
   return (
     // <RouterProvider router={router} />
     <Routes>
-      <Route path='/' element={<Layout/>}>
+      <Route path={routes.default} element={<Layout/>}>
         {userRole === usersRoles.client ? (
           <>
-            <Route path='' index element={<ClientOrdersPage/>}/>
-            <Route path=':orderID' element={<ClientOrderPage/>}/>
-            <Route path=':orderID/review' element={<ClientOrderReviewPage/>}/>
+            <Route path={routes.client.orders} index element={<ClientOrdersPage/>}/>
+            <Route path={routes.client.order()} element={<ClientOrderPage/>}/>
+            <Route path={routes.client.feedback() } element={<ClientOrderReviewPage/>}/>
+
+            <Route path='*' element={<Navigate to={routes.client.orders}/> } />
           </>
         ) : null}
         {userRole === usersRoles.clientRepresentative ? (
           <>
-            <Route path='' index element={<ClientRepresentativeOrderReviewPage/>}/>
-            <Route path=':reviewID' element={<ClientRepresentativeOrderPage/>}/>
+            <Route path={routes.clientRepresentative.orders} index element={<ClientRepresentativeOrderReviewPage/>}/>
+            <Route path={routes.clientRepresentative.feedback()} element={<ClientRepresentativeOrderPage/>}/>
+
+            <Route path='*' element={<Navigate to={routes.clientRepresentative.orders}/> } />
           </>
         ) : null}
         {userRole === usersRoles.brigadier ? (
           <>
-            <Route path='orders'  element={<BrigadierOrdersPage/>}/>
-            <Route path='forms' index element={<BrigadierFormsPage/>} />
-            <Route path='forms/:formID' element={<BrigadierFormItemPage/>}/>
-            {/*<Route path='*' element={<Navigate to={'forms'}/> } />*/}
+            <Route path={routes.brigadier.orders}  element={<BrigadierOrdersPage/>}/>
+            <Route path={routes.brigadier.questionnaires} index element={<BrigadierFormsPage/>} />
+            <Route path={routes.brigadier.questionnaire()} element={<BrigadierFormItemPage/>}/>
+
+            <Route path='*' element={<Navigate to={routes.brigadier.questionnaires}/> } />
           </>
         ) : null}
         {userRole === usersRoles.controller ? (
           <>
-            <Route path='' index element={<ControllerOrdersPage/>}/>
-            <Route path=':reviewID' element={<ControllerOrderPage/>}/>
+            <Route path={routes.controller.feedbackList} index element={<ControllerOrdersPage/>}/>
+            <Route path={routes.controller.feedback()} element={<ControllerOrderPage/>}/>
+
+            <Route path='*' element={<Navigate to={routes.controller.feedbackList}/> } />
           </>
         ) : null}
         {userRole === usersRoles.agent ? (
           <>
-            <Route path='' index element={<AgentOrdersPage/>}/>
-            <Route path=':orderID' element={<div/>}/>
+            <Route path={routes.agent.orders} index element={<AgentOrdersPage/>}/>
+            <Route path={routes.agent.order()}  element={<AgentOrderPage/>}/>
+
+            <Route path='*' element={<Navigate to={routes.agent.orders}/> } />
           </>
         ) : null}
         {userRole === usersRoles.technologist ? (
           <>
-            <Route path='' index element={<TechnologistMaterialSelectionPage/>}/>
-            <Route path=':formID' element={<TechnologistFormPage/>}/>
+            <Route path={routes.technologist.questionnaires} index element={<TechnologistMaterialSelectionPage/>}/>
+            <Route path={routes.technologist.questionnaire()} element={<TechnologistFormPage/>}/>
+
+            <Route path='*' element={<Navigate to={routes.technologist.questionnaires}/> } />
           </>
         ) : null}
         {userRole === usersRoles.courier ? (
           <>
-            <Route path='' index element={<CourierOrdersPage/>}/>
+            <Route path={routes.courier.orders} index element={<CourierOrdersPage/>}/>
+
+            <Route path='*' element={<Navigate to={routes.courier.orders}/> } />
           </>
         ) : null}
-        {/*<Route path='/*' element={<Navigate to={'/'}/> } />*/}
+        <Route path='*' element={<Navigate to={'/'}/> } />
       </Route>
     </Routes>
   );

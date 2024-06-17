@@ -18,107 +18,35 @@ import ClientRepresentativeOrderPage from "../pages/clientRepresentativePages/or
 import {useUserData} from "../hooks/useUserData";
 import {usersRoles} from "../types/roles";
 
-export const defaultRoutes = (routes: RouteObject[]): RouteObject[] => [
-  {
-    path: "/",
-    element: <Layout/>,
-    errorElement: <div>Ошибка</div>,
-    children: routes,
+export const routes = {
+  default: '/',
+  client: {
+    orders: '',
+    order: (orderID?: number | string) => `${routes.client.orders}/${orderID ?? ':orderID'}`,
+    feedback: (orderID?: number | string) => `${routes.client.order(orderID)}/feedback`
   },
-]
-
-
-export const unAuthRoutes: RouteObject[] = [
-  {
-    path: "error",
-    element: <div>Ошибка</div>,
+  clientRepresentative: {
+    orders: '',
+    feedback: (orderID?: number | string) => `${routes.clientRepresentative.orders}/${orderID ?? ':orderID'}`
   },
-]
-
-export const clientRoutes: RouteObject[] = [
-  {
-    path: "order",
-    element: <ClientOrdersPage/>,
-    children: [
-      {
-        path: ":orderID",
-        element: <ClientOrderPage/>,
-        children: [
-          {
-            path: "review",
-            element: <ClientOrderReviewPage/>,
-          },
-        ]
-      }
-    ]
+  brigadier: {
+    orders: 'orders',
+    questionnaires: '',
+    questionnaire: (questionnaireID?: number | string) => `${routes.brigadier.questionnaires}/${questionnaireID ?? ':questionnaireID'}`
   },
-]
-
-export const clientRepresentativeRoutes: RouteObject[] = [
-  {
-    path: "orders",
-    element: <ClientRepresentativeOrderReviewPage/>,
-    children: [
-      {
-        path: ":reviewID",
-        element: <ClientRepresentativeOrderPage/>,
-      },
-    ]
+  controller: {
+    feedbackList: '',
+    feedback: (orderID?: number | string) => `${routes.controller.feedbackList}/${orderID ?? ':orderID'}`,
   },
-]
-
-export const brigadierRoutes: RouteObject[] = [
-  {
-    path: "orders",
-    element: <BrigadierOrdersPage/>,
-  }, {
-    path: "forms",
-    element: <BrigadierFormsPage/>,
-    children: [
-      {
-        path: ":formID",
-        element: <BrigadierFormItemPage/>,
-      }
-    ]
+  agent: {
+    orders: '',
+    order: (orderID?: number | string) => `${routes.agent.orders}/${orderID ?? ':orderID'}`,
+  },
+  technologist: {
+    questionnaires: '',
+    questionnaire: (questionnaireID?: number | string) => `${routes.technologist.questionnaires}/${questionnaireID ?? ':questionnaireID'}`
+  },
+  courier: {
+    orders: ''
   }
-]
-
-export const controllerRoutes: RouteObject[] = [
-  {
-    path: "review",
-    element: <ControllerOrdersPage/>,
-    children: [
-      {
-        path: ":reviewID",
-        element: <ControllerOrderPage/>,
-      }
-    ]
-  }
-]
-export const agentRoutes: RouteObject[] = [
-  {
-    path: "orders",
-    element: <AgentOrdersPage/>,
-    children: [
-    
-    ]
-  },
-]
-export const technologistRoutes: RouteObject[] = [
-  {
-    path: "selection",
-    element: <TechnologistMaterialSelectionPage/>,
-    children: [
-      {
-        path: ":formID",
-        element: <TechnologistFormPage/>,
-      },
-    ]
-  }
-]
-export const courierRoutes: RouteObject[] = [
-  {
-    path: "orders",
-    element: <CourierOrdersPage/>,
-  },
-]
+}

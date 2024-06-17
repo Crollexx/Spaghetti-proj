@@ -10,10 +10,3 @@ export interface IFormData {
   photo:	string
   badHabits: string[]
 }
-
-NewDelList{
-  deliveryDate	string($date-time)
-  questionnaireIds	[
-    uniqueItems: true
-  integer($int64)]
-}
