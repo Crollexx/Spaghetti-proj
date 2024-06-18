@@ -11,7 +11,7 @@ import {routes} from "../../routes/routes";
 const Layout: React.FC = () => {
 
   const navigate = useNavigate()
-  const { userRole } = useUserData()
+  const { userRole, onRoleChange } = useUserData()
 
   const userSelected = userRole != null
   const isBrigadier = userSelected && userRole === usersRoles.brigadier
@@ -53,7 +53,7 @@ const Layout: React.FC = () => {
           onClick={() => handleNavigate('')}
         />
         {userSelected ? (
-          <ProfileButton userRole={userRole} />
+          <ProfileButton userRole={userRole} setRole={onRoleChange}/>
         ) : null}
       </header>
       <main className={styles.content}>

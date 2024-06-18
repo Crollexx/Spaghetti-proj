@@ -4,8 +4,6 @@ import {routes} from "../../../routes/routes";
 import StatusBadge from "../../../components/statusBadge/statusBadge";
 import {orderStatuses} from "../../../types/order";
 import Breadcrumbs from "../../../components/breadcrumbs/breadcrumbs";
-import DefaultList from "../../../components/list/list";
-import TechnologistCard from "../../../components/technologistCard/technologistCard";
 
 const TechnologistMaterialSelectionPage = () => {
   

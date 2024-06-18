@@ -1,4 +1,5 @@
 .wrapper {
+  position: relative;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -14,6 +15,13 @@
     text-align: left;
 
     color:  #FFFFFF;
+  }
+
+  .select {
+    position: absolute;
+    top: 15px;
+    right: 120px;
+    visibility: hidden;
   }
 
 }
