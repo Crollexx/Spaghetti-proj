@@ -3,7 +3,7 @@ import Breadcrumbs from "../../../components/breadcrumbs/breadcrumbs";
 import {routes} from "../../../routes/routes";
 import OrdersTable from "../../../components/ordersTable/ordersTable";
 import {ordersData} from "../../../fakeBackend/ordersData";
-import {IOrder, orderStatuses} from "../../../types/order";
+import {IOrder} from "../../../types/order";
 import {getOrders} from "../../../api/order";
 
 const BrigadierOrdersPage = () => {
@@ -11,7 +11,7 @@ const BrigadierOrdersPage = () => {
   const [data, setData] = useState<IOrder[]>(ordersData)
   
   const handleGetData = async (): Promise<IOrder[]> => {
-    return ordersData
+    return await getOrders(false);
   }
   
   useEffect(() => {

@@ -1,56 +1,66 @@
 import React, {useEffect, useState} from 'react';
-import styles from './styles.module.scss'
 import DefaultList from "../../../components/list/list";
 import {routes} from "../../../routes/routes";
 import {IListItem} from "../../../components/listItem/listItem";
 import StatusBadge from "../../../components/statusBadge/statusBadge";
-import {orderStatuses} from "../../../types/order";
+import {getOrders} from "../../../api/order";
+import Breadcrumbs from "../../../components/breadcrumbs/breadcrumbs";
+import {getFeedbackList} from "../../../api/feedback";
 
 const ClientOrdersPage = () => {
   
-  const [data, setData] = useState<IListItem[]>([])
+  const [data,setData] = useState<IListItem[]>([])
+  const [filter, setFilter] = useState(false);
+  const [notification, setNotification] = useState('')
   
-  const handleGetData = async (): Promise<IListItem[]> => {
-    const orders: IListItem[] = [
-      {
-        link: routes.client.order(101),
-        badge: <StatusBadge status={orderStatuses.delivered} type='order'/>,
-        itemID: '101'
-      },{
-        link: routes.client.order(102),
-        badge: <StatusBadge status={orderStatuses.cooking} type='order'/>,
-        itemID: '102'
-      },{
-        link: routes.client.order(103),
-        badge: <StatusBadge status={orderStatuses.done} type='order'/>,
-        itemID: '103'
-      },{
-        link: routes.client.order(104),
-        badge: <StatusBadge status={orderStatuses.created} type='order'/>,
-        itemID: '104'
-      }, {
-        link: routes.client.order(105),
-        badge: <StatusBadge status={orderStatuses.awaitDelivery} type='order'/>,
-        itemID: '105'
-      },
-    ]
-    return orders
+  const handleGetAvailableFeedback = async () => {
+    return await getFeedbackList()
+  }
+  const handleGetData = async (filter: boolean): Promise<IListItem[]> => {
+    const data = await getOrders(filter);
+    
+    return  data?.map(({ id, status,}) => ({
+      link: routes.client.order(id),
+      badge: <StatusBadge status={status} type='order'/>,
+      itemID: id
+    }))
   }
   
   useEffect(() => {
-    handleGetData().then((res) => {setData(res)})
+    handleGetData(filter).then((res) => {
+      setData(res)
+    })
+  },[filter])
+  
+  useEffect(() => {
+    handleGetAvailableFeedback().then((res) => {
+      res?.length > 0
+        ? res?.length === 1
+          ? setNotification(`Клиенсткий представитель просит Вас оставить отзыв о заказе №${res[0]}`)
+          : setNotification(`Клиенсткий представитель просит Вас оставить отзыв о заказах №${res.join(', ')}`)
+        : setNotification('')
+    })
   },[])
   
-
+  const breadcrumbs = [
+    {
+      title: 'Заказы',
+      link: routes.client.orders,
+    },
+  ]
 
   return (
     <>
-      <h3 className={styles.text}>Заказы</h3>
+      <Breadcrumbs values={breadcrumbs}/>
       <DefaultList
         data={data}
-        onSelectFilter={() => {}}
-        onClearFilter={() => {}}
-        notificationText='Клиенсткий представитель просит Вас оставить отзыв о заказе №101'
+        onSelectFilter={() => {
+          setFilter(true)
+        }}
+        onClearFilter={() => {
+          setFilter(false)
+        }}
+        notificationText={notification}
       />
     </>
   );

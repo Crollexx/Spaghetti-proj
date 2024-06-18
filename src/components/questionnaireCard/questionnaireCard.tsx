@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import {IFormData} from "../../types/form";
+import {IQuestionnairesData} from "../../types/form";
 import styles from './styles.module.scss'
 import {Skeleton} from "@mui/material";
 
-interface IQuestionnaireCardProps extends IFormData {
+interface IQuestionnaireCardProps extends IQuestionnairesData {
 
 }
 const QuestionnaireCard: React.FC<IQuestionnaireCardProps> = ({

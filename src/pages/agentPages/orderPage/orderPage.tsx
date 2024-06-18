@@ -1,31 +1,38 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Breadcrumbs from "../../../components/breadcrumbs/breadcrumbs";
 import {routes} from "../../../routes/routes";
-import FeedbackCard from "../../../components/feedbackCard/feedbackCard";
-import {useParams} from "react-router-dom";
-import {IFeedbackData} from "../../../types/feedback";
+import {useNavigate, useParams} from "react-router-dom";
+import OrderCard from "../../../components/orderCard/orderCard";
+import {IOrder} from "../../../types/order";
+import {getOrder} from "../../../api/order";
 
 const AgentOrderPage = () => {
   
-  const {orderID} = useParams()
+  const [data, setData] = useState<IOrder | null>(null)
   
-  const values: IFeedbackData= {
-    orderId: Number(orderID),
-    comment: "отзыв",
-    speed: 4,
-    quality: 5,
-    qualityBox: 2,
-    impression: 3
+  const {orderID} = useParams()
+  const navigate = useNavigate()
+  
+  const handleGetOrderData = async (orderID: number) => {
+    const data = await getOrder(orderID)
+    setData(data)
   }
   
+  useEffect(() => {
+    if ( orderID === undefined ) {
+      navigate( routes.agent.orders )
+    } else {
+      handleGetOrderData(Number(orderID))
+    }
+  }, [navigate, orderID])
   
   const breadcrumbs = [
     {
-      title: 'Отзывы',
+      title: 'Заказы',
       link: routes.agent.orders,
     },
     {
-      title: `Отзыв по заказу ${orderID}`,
+      title: `Заказ ${orderID}`,
       link: routes.agent.order(orderID),
     }
   ]
@@ -34,7 +41,9 @@ const AgentOrderPage = () => {
   return (
     <>
       <Breadcrumbs values={breadcrumbs}/>
-      <FeedbackCard initialValues={values}  isEdit={false}/>
+      {data ? (
+        <OrderCard {...data} feedbackNotification={false}/>
+      ) : null}
     </>
   );
 };

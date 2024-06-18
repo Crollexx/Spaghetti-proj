@@ -13,21 +13,21 @@ const ClientRepresentativeOrderPage = () => {
     const orders: IListItem[] = [
       {
         badge: <StatusBadge status={feedbackStatuses.requested} type='feedback'/>,
-        itemID: '101'
+        itemID: 101
       },{
         badge: <StatusBadge status={feedbackStatuses.unset} type='feedback'/>,
-        itemID: '102'
+        itemID: 102
       },{
         link: routes.clientRepresentative.feedback(103),
         badge: <StatusBadge status={feedbackStatuses.done} type='feedback'/>,
-        itemID: '103'
+        itemID: 103
       },{
         badge: <StatusBadge status={feedbackStatuses.requested} type='feedback'/>,
-        itemID: '104'
+        itemID: 104
       }, {
         link: routes.clientRepresentative.feedback(105),
         badge: <StatusBadge status={feedbackStatuses.done} type='feedback'/>,
-        itemID: '105'
+        itemID: 105
       },
     ]
     return orders

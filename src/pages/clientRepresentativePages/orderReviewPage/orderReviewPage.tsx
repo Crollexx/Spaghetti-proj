@@ -1,22 +1,26 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {useParams} from "react-router-dom";
-import {IFeedbackData} from "../../../types/feedback";
+import { IFeedbackResult} from "../../../types/feedback";
 import {routes} from "../../../routes/routes";
 import Breadcrumbs from "../../../components/breadcrumbs/breadcrumbs";
 import FeedbackCard from "../../../components/feedbackCard/feedbackCard";
+import {getFeedbackItem} from "../../../api/feedback";
 
 const ClientRepresentativeOrderReviewPage = () => {
   
+  const [data,setData] = useState<IFeedbackResult | null>(null)
+  
   const {orderID} = useParams()
   
-  const values: IFeedbackData= {
-    orderId: Number(orderID),
-    comment: "отзыв",
-    speed: 4,
-    quality: 5,
-    qualityBox: 2,
-    impression: 3
+  const handleGetOrderInfo = async (orderID: number) => {
+    return await getFeedbackItem(orderID)
   }
+  
+  useEffect(() => {
+    handleGetOrderInfo(Number(orderID)).then((res) => {
+      setData(res)
+    })
+  },[orderID])
   
   
   const breadcrumbs = [
@@ -34,7 +38,9 @@ const ClientRepresentativeOrderReviewPage = () => {
   return (
     <>
       <Breadcrumbs values={breadcrumbs}/>
-      <FeedbackCard initialValues={values}  isEdit={false}/>
+      {data ? (
+        <FeedbackCard initialValues={data}  isEdit={false}/>
+      ) : null}
     </>
   );
 };

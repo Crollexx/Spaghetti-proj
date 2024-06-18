@@ -1,19 +1,21 @@
 import React, {useEffect, useState} from 'react';
-import {IFormData} from "../../../types/form";
+import { IQuestionnairesData} from "../../../types/form";
 import {useNavigate, useParams} from "react-router-dom";
 import {routes} from "../../../routes/routes";
 import Breadcrumbs from "../../../components/breadcrumbs/breadcrumbs";
 import QuestionnaireCard from "../../../components/questionnaireCard/questionnaireCard";
+import {getQuestionnaire} from "../../../api/questionnaire";
 
 const TechnologistFormPage = () => {
-  const [data, setData] = useState<null | IFormData>(null)
+  const [data, setData] = useState<null | IQuestionnairesData>(null)
   
   const navigate = useNavigate()
   const {questionnaireID} = useParams()
   
+  getQuestionnaire(Number(questionnaireID))
   const handleGetQuestionnaire = async ( id: string ) => {
     
-    const data: IFormData = {
+    const data: IQuestionnairesData = {
       id: Number(id),
       name: 'Иван',
       surname: 'Иванов',

@@ -1,35 +1,47 @@
-import React from 'react';
-import styles from "../../clientPages/ordersPage/styles.module.scss";
+import React, {useEffect, useState} from 'react';
 import DefaultList from "../../../components/list/list";
 import {IListItem} from "../../../components/listItem/listItem";
 import {routes} from "../../../routes/routes";
+import Breadcrumbs from "../../../components/breadcrumbs/breadcrumbs";
+import {getQuestionnaires} from "../../../api/questionnaire";
 
 const BrigadierQuestionnairesPage = () => {
   
-  const questionnaire: IListItem[] = [
+  const [data, setData] = useState<IListItem[]>([])
+  const [filter, setFilter] = useState(false);
+  
+  const handleGetData = async (filter: boolean): Promise<IListItem[]> => {
+    const data = await getQuestionnaires(filter);
+    
+    return  data?.map(({ id,}) => ({
+      link: routes.brigadier.questionnaire(id),
+      itemID: id
+    }))
+  }
+  
+  useEffect(() => {
+    handleGetData(filter).then((res) => {
+      setData(res)
+    })
+  },[filter])
+  
+  const breadcrumbs = [
     {
-      itemID: '101',
-      link: routes.brigadier.questionnaire('101')
-    },{
-      itemID: '102',
-      link: routes.brigadier.questionnaire('102')
-    },{
-      itemID: '103',
-      link: routes.brigadier.questionnaire('103')
-    },{
-      itemID: '104',
-      link: routes.brigadier.questionnaire('104')
+      title: 'Анкеты',
+      link: routes.brigadier.questionnaires,
     },
   ]
   
   return (
     <>
-      <h3 className={styles.text}>Анкеты</h3>
+      <Breadcrumbs values={breadcrumbs}/>
       <DefaultList
-        data={questionnaire}
+        data={data}
         onSelectFilter={() => {
+          setFilter(true)
         }}
         onClearFilter={() => {
+          setFilter(false)
         }}
       />
     </>

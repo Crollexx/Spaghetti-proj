@@ -11,19 +11,19 @@ const ControllerOrdersPage = () => {
     const orders: IListItem[] = [
       {
         link: routes.controller.feedback(101),
-        itemID: '101'
+        itemID: 101
       },{
         link: routes.controller.feedback(102),
-        itemID: '102'
+        itemID: 102
       },{
         link: routes.controller.feedback(103),
-        itemID: '103'
+        itemID: 103
       },{
         link: routes.controller.feedback(104),
-        itemID: '104'
+        itemID: 104
       }, {
         link: routes.controller.feedback(105),
-        itemID: '105'
+        itemID: 105
       },
     ]
     return orders

@@ -17,7 +17,39 @@
   height: 420px;
   background: #F4EBDC;
   margin-top: auto;
+  padding: 40px;
 
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+
+  &-title {
+    font-family: Playfair Display, serif;
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 39.99px;
+    text-align: left;
+
+    margin-bottom: 70px;
+  }
+
+  &-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+
+  &-item {
+    font-family: Playfair Display, Serif;
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 39.99px;
+    text-align: left;
+
+  }
 }
 
 .list {

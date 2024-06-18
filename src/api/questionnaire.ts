@@ -1,7 +1,33 @@
-import axios from "axios";
+import {questionnairesData} from "../fakeBackend/questionnaire";
+import {IQuestionnairesData} from "../types/form";
 
-export const getQuestionnaire = async (orderID: string) => {
+export const getQuestionnaires = async (filter: boolean):Promise<IQuestionnairesData[]> => {
+  // return await sendRequest('GET', '/questionnaire', {filter})
   
-  const res = await axios.get("http://84.38.189.195:55971/api/v1/order")
-  console.log(res)
+  //remove this
+  return questionnairesData
+}
+
+export const getQuestionnaire = async (questionnaireID: number):Promise<IQuestionnairesData> => {
+  // return await sendRequest('GET', `/questionnaire/${questionnaireID}`)
+  
+  //remove this
+  return questionnairesData.filter(({ id }) => questionnaireID === id)[0]
+}
+
+export const acceptQuestionnaire = async (questionnaireID: number):Promise<unknown> => {
+  // return await sendRequest('GET', `/questionnaire/${questionnaireID}/approve`)
+  
+  //remove this
+  return new Promise((resolveInner) => {
+    setTimeout(resolveInner, 100);
+  })
+}
+export const rejectQuestionnaire = async (questionnaireID: number):Promise<unknown> => {
+  // return await sendRequest('GET', `/questionnaire/${questionnaireID}/reject`)
+  
+  //remove this
+  return new Promise((resolveInner) => {
+    setTimeout(resolveInner, 100);
+  })
 }

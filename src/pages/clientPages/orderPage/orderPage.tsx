@@ -3,8 +3,8 @@ import {useNavigate, useParams} from "react-router-dom";
 import {routes} from "../../../routes/routes";
 import Breadcrumbs from "../../../components/breadcrumbs/breadcrumbs";
 import OrderCard from "../../../components/orderCard/orderCard";
-import {IOrder, orderStatuses} from "../../../types/order";
-import {ordersData} from "../../../fakeBackend/ordersData";
+import {IOrder} from "../../../types/order";
+import {getOrder, rejectOrderDelivery} from "../../../api/order";
 
 
 const ClientOrderPage = () => {
@@ -14,14 +14,19 @@ const ClientOrderPage = () => {
   const navigate = useNavigate()
   const {orderID} = useParams()
 
-  const getOrderData = (orderID: string) => {
-    const preparedData = ordersData.find(
-      ({id }) => id === Number(orderID)
-    )
-    setData(preparedData ?? null)
+  const getOrderData = async (orderID: number) => {
+    return await getOrder(orderID)
+  }
+  
+  const handleApproveDelivery = async (orderID: number) => {
+    await rejectOrderDelivery(orderID)
+  }
+  
+  const handleRejectDelivery = async (orderID: number) => {
+    await rejectOrderDelivery(orderID)
   }
 
-  const handleAddFeedback = (orderID: string) => {
+  const handleAddFeedback = (orderID: number) => {
     navigate(routes.client.feedback(orderID))
   }
 
@@ -29,7 +34,9 @@ const ClientOrderPage = () => {
     if ( orderID === undefined ) {
       navigate( routes.client.orders )
     } else {
-      getOrderData(orderID)
+      getOrderData(Number(orderID)).then((res) => {
+        setData(res)
+      })
     }
   }, [navigate, orderID])
 
@@ -49,9 +56,9 @@ const ClientOrderPage = () => {
       <Breadcrumbs values={breadcrumbs}/>
       {data ? (
         <OrderCard
-          onFeedbackClick={() => handleAddFeedback(orderID as string)}
-          onDeliveryAccept={() => {}}
-          onDeliveryReject={() => {}}
+          onFeedbackClick={() => handleAddFeedback(Number(orderID) )}
+          onDeliveryAccept={() => handleApproveDelivery(Number(orderID))}
+          onDeliveryReject={() => handleRejectDelivery(Number(orderID))}
           {...data}
         />
       ) : null}

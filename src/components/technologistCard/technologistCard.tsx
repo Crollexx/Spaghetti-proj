@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import styles from './styles.module.scss'
 import DefaultList from "../list/list";
-import {IFormData} from "../../types/form";
+import {IQuestionnairesData} from "../../types/form";
 import {routes} from "../../routes/routes";
 import {Checkbox} from "@mui/material";
 interface ITechnologistCardProps {
@@ -10,19 +10,18 @@ interface ITechnologistCardProps {
     height:	[number, number]
     weight:	[number, number]
   }
-  data: IFormData[]
-  onSubmit: ( value: string[]) => void
+  data: IQuestionnairesData[]
+  onSubmit: ( value: number[]) => void
 }
 const TechnologistCard: React.FC<ITechnologistCardProps> = ({ data, filters, onSubmit }) => {
   
-  const [selectedItems, setSelectedItems] = useState<string[]>([])
+  const [selectedItems, setSelectedItems] = useState<number[]>([])
   
-  const handleSubmit = (selectedItems: string[]) => {
+  const handleSubmit = (selectedItems: number[]) => {
     onSubmit(selectedItems)
     setSelectedItems([])
   }
-  const handleClick = (itemID: string) => {
-    console.log(itemID)
+  const handleClick = (itemID: number) => {
     setSelectedItems(prevState =>
       prevState.includes(itemID)
         ? prevState.filter((item) => item !== itemID)
@@ -31,13 +30,13 @@ const TechnologistCard: React.FC<ITechnologistCardProps> = ({ data, filters, onS
   }
   
   const preparedData = data.map(({ id, }) => ({
-    itemID: String(id),
+    itemID: id,
     link: routes.technologist.questionnaire(id),
     badge: (
       <Checkbox
-        value={selectedItems.includes(String(id))}
+        value={selectedItems.includes(id)}
         className={styles.select}
-        onClick={() => handleClick(String(id))}
+        onClick={() => handleClick(id)}
       />
     ),
     
@@ -48,7 +47,7 @@ const TechnologistCard: React.FC<ITechnologistCardProps> = ({ data, filters, onS
       <div className={styles.row}>
         <div className={styles.card}>
           <span className={styles['card-title']}>
-            {filters.orderID}
+            №{filters.orderID}
           </span>
           <div className={styles['card-list']}>
             <span className={styles['card-item']}>

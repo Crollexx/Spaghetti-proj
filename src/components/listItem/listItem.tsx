@@ -5,10 +5,10 @@ import {IconButton} from "@mui/material";
 import {useNavigate} from "react-router-dom";
 
 export interface IListItem {
-  itemID: string
+  itemID: number
   link?: string
   badge?: React.ReactNode
-  onClick?: (itemID: string) => void
+  onClick?: (itemID: number) => void
 }
 
 interface IListItemProps extends IListItem {}

@@ -4,6 +4,7 @@ import Breadcrumbs from "../../../components/breadcrumbs/breadcrumbs";
 import {routes} from "../../../routes/routes";
 import {useNavigate, useParams} from "react-router-dom";
 import {IFeedbackData} from "../../../types/feedback";
+import {sendFeedback} from "../../../api/feedback";
 
 
 const ClientOrderReviewPage = () => {
@@ -20,8 +21,8 @@ const ClientOrderReviewPage = () => {
     comment: ''
   }
   
-  const handleSubmit = (values: IFeedbackData) => {
-    console.log(values)
+  const handleSubmit = async (values: IFeedbackData) => {
+    await sendFeedback(values)
   }
   
   useEffect(() => {

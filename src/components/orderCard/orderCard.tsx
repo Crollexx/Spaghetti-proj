@@ -3,9 +3,9 @@ import styles from './styles.module.scss'
 import {IOrder} from "../../types/order";
 
 interface IOrderCardProps extends IOrder {
-  onFeedbackClick: () => void;
-  onDeliveryAccept: () => void
-  onDeliveryReject: () => void
+  onFeedbackClick?: () => void;
+  onDeliveryAccept?: () => void
+  onDeliveryReject?: () => void
 }
 
 const OrderCard: React.FC<IOrderCardProps> = ({
@@ -18,9 +18,9 @@ const OrderCard: React.FC<IOrderCardProps> = ({
                                                 paymentType,
                                                 feedbackNotification,
                                                 deliveryNotification,
-                                                onDeliveryAccept,
-                                                onDeliveryReject,
-                                                onFeedbackClick,
+                                                onDeliveryAccept = () => {},
+                                                onDeliveryReject = () => {},
+                                                onFeedbackClick = () => {},
                                               }) => {
   return (
     <div className={styles.wrapper}>
@@ -75,7 +75,7 @@ const OrderCard: React.FC<IOrderCardProps> = ({
           <span>{total}р</span>
         </div>
       </div>
-      {true ? (
+      {deliveryNotification ? (
         <div className={styles.btn}>
           <button onClick={() => onDeliveryAccept()}>
             Подтвердить

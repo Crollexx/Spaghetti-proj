@@ -8,7 +8,7 @@ interface IDefaultListBaseProps {
   data: IListItem[]
   onSelectFilter?: () => void
   onClearFilter?: () => void
-  onItemClick?: (itemID: string) => void
+  onItemClick?: (itemID: number) => void
   notificationText?: string
   className?: string
 }

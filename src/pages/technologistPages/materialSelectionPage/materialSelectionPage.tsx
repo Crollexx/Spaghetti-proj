@@ -5,10 +5,10 @@ import StatusBadge from "../../../components/statusBadge/statusBadge";
 import {orderStatuses} from "../../../types/order";
 import Breadcrumbs from "../../../components/breadcrumbs/breadcrumbs";
 import TechnologistCard from "../../../components/technologistCard/technologistCard";
-import {IFormData} from "../../../types/form";
+import {IQuestionnairesData} from "../../../types/form";
 
 const TechnologistMaterialSelectionPage = () => {
-  const handleSave = (values: string[]) => {
+  const handleSave = (values: number[]) => {
     console.log(values)
   }
   
@@ -51,7 +51,7 @@ const TechnologistMaterialSelectionPage = () => {
     id: 104,
   },{
     id: 105,
-  }] as IFormData[]
+  }] as IQuestionnairesData[]
   
   const filters = {
     orderID: 101,
