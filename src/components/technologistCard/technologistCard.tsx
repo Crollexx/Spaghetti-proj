@@ -38,7 +38,6 @@ const TechnologistCard: React.FC<ITechnologistCardProps> = ({ data, filters, onS
         value={selectedItems.includes(String(id))}
         className={styles.select}
         onClick={() => handleClick(String(id))}
-        onSelect={() => console.log('eee')}
       />
     ),
     
