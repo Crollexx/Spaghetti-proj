@@ -17,6 +17,10 @@ const TechnologistCard: React.FC<ITechnologistCardProps> = ({ data, filters, onS
   
   const [selectedItems, setSelectedItems] = useState<string[]>([])
   
+  const handleSubmit = (selectedItems: string[]) => {
+    onSubmit(selectedItems)
+    setSelectedItems([])
+  }
   const handleClick = (itemID: string) => {
     console.log(itemID)
     setSelectedItems(prevState =>
@@ -65,7 +69,7 @@ const TechnologistCard: React.FC<ITechnologistCardProps> = ({ data, filters, onS
           onItemClick={() => {}}
         />
       </div>
-      <button className={styles.btn} onClick={() => onSubmit(selectedItems)}>
+      <button className={styles.btn} onClick={() => handleSubmit(selectedItems)}>
         Сохранить
       </button>
     </div>
