@@ -16,15 +16,26 @@ export const getQuestionnaire = async (questionnaireID: number):Promise<IQuestio
 }
 
 export const acceptQuestionnaire = async (questionnaireID: number):Promise<unknown> => {
-  // return await sendRequest('GET', `/questionnaire/${questionnaireID}/approve`)
+  // return await sendRequest('PUT', `/questionnaire/${questionnaireID}/approve`)
   
   //remove this
   return new Promise((resolveInner) => {
     setTimeout(resolveInner, 100);
   })
 }
+
 export const rejectQuestionnaire = async (questionnaireID: number):Promise<unknown> => {
-  // return await sendRequest('GET', `/questionnaire/${questionnaireID}/reject`)
+  // return await sendRequest('PUT', `/questionnaire/${questionnaireID}/reject`)
+  
+  //remove this
+  return new Promise((resolveInner) => {
+    setTimeout(resolveInner, 100);
+  })
+}
+
+
+export const getQuestionnairePhoto = async (path: string):Promise<unknown> => {
+  // return await sendRequest('GET', `/questionnaire/photo/${path}`)
   
   //remove this
   return new Promise((resolveInner) => {

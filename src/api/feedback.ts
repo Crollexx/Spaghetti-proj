@@ -3,17 +3,13 @@ import {sendRequest} from "./index";
 
 
 export const getFeedbackItem = async (orderID: number): Promise<IFeedbackResult> => {
-  return await sendRequest('POST', `/feedback/${orderID}`)
+  return await sendRequest('GET', `/feedback/${orderID}`)
 }
 
 export const sendFeedback = async (value: IFeedbackData) => {
-  // return await sendRequest('POST', '/feedback', {data: IFeedbackData})
-  console.log(value)
+  return await sendRequest('POST', '/feedback', value)
 }
 
 export const getFeedbackList = async ():Promise<number[]> => {
-  // return await sendRequest('GET', '/feedback',)
-  
-  //remove this
-  return [1,2,3]
+  return await sendRequest('GET', '/feedback',)
 }

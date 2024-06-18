@@ -1,4 +1,4 @@
-import {IOrder} from "../types/order";
+import {IOrder, orderStatuses} from "../types/order";
 import {ordersData} from "../fakeBackend/ordersData";
 import {sendRequest} from "./index";
 
@@ -17,11 +17,15 @@ export const getOrder = async (orderID: number):Promise<IOrder> => {
   return ordersData.filter(({ id }) => orderID === id)[0]
 }
 
-export const changeOrderStatus = (orderID: number) => {
-
+export const changeOrderStatus = (orderID: number, status: orderStatuses): Promise<unknown> => {
+  // return await sendRequest('PUT', `/order/status/${orderID}`)
+  
+  return new Promise((resolveInner) => {
+    setTimeout(resolveInner, 100);
+  })
 }
 
-export const confirmOrderDelivery = async (orderID: number) => {
+export const confirmOrderDelivery = async (orderID: number): Promise<unknown> => {
   // return await sendRequest('PUT', `/order/delivery/approve/${orderID}`)
   
   return new Promise((resolveInner) => {
@@ -29,8 +33,7 @@ export const confirmOrderDelivery = async (orderID: number) => {
   })
 }
 
-// @ts-ignore
-export const rejectOrderDelivery = (orderID: number) => {
+export const rejectOrderDelivery = (orderID: number): Promise<unknown> => {
   // return await sendRequest('PUT', `/order/delivery/reject/${orderID}`)
   
   return new Promise((resolveInner) => {
