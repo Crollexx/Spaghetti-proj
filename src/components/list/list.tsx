@@ -2,21 +2,15 @@ import React from 'react';
 import styles from './styles.module.scss'
 import ListNotification, {IListNotificationProps} from "../listNotification/listNotification";
 import ListFilters, {IListFiltersProps} from "../listFilters/listFilters";
-import ListItem from "../listItem/listItem";
-import {IOrder} from "../../types/order";
+import ListItem, {IListItem} from "../listItem/listItem";
 
 interface IDefaultListBaseProps {
-  data: IOrder[]
+  data: IListItem[]
+  onSelectFilter?: () => void
+  onClearFilter?: () => void
+  notificationText?: string
 }
-
-interface IWithFilters extends IDefaultListBaseProps, IListFiltersProps{}
-
-interface IDefaultListWithNotification extends IDefaultListBaseProps, IListNotificationProps{}
-
-type DefaultListPropsType = IWithFilters | IDefaultListWithNotification
-
-// @ts-ignore
-const DefaultList: React.FC<DefaultListPropsType> = ({ data, notificationText, onSelectFilter, onClearFilter }) => {
+const DefaultList: React.FC<IDefaultListBaseProps> = ({ data, notificationText, onSelectFilter, onClearFilter }) => {
 
   const showNotification = !!notificationText
   const showFilters = !!onClearFilter && !!onSelectFilter
@@ -34,8 +28,13 @@ const DefaultList: React.FC<DefaultListPropsType> = ({ data, notificationText, o
         ) : null}
       </div>
       <div className={preparedListClassName}>
-        {data?.map((item) => (
-          <ListItem orderID={item.id} key={item.id} {...item}/>
+        {data?.map(({ itemID, link, badge}) => (
+          <ListItem
+            key={itemID ?? link}
+            itemID={itemID}
+            link={link}
+            badge={badge}
+          />
         ))}
       </div>
 

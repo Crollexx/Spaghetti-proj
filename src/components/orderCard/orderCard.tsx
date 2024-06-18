@@ -4,6 +4,8 @@ import {IOrder} from "../../types/order";
 
 interface IOrderCardProps extends IOrder {
   onFeedbackClick: () => void;
+  onDeliveryAccept: () => void
+  onDeliveryReject: () => void
 }
 
 const OrderCard: React.FC<IOrderCardProps> = ({
@@ -11,11 +13,14 @@ const OrderCard: React.FC<IOrderCardProps> = ({
                                                 orderDate,
                                                 total,
                                                 items,
-  servingType,
-  deliveryType,
-  paymentType,
-  feedbackNotification,
-  onFeedbackClick,
+                                                servingType,
+                                                deliveryType,
+                                                paymentType,
+                                                feedbackNotification,
+                                                deliveryNotification,
+                                                onDeliveryAccept,
+                                                onDeliveryReject,
+                                                onFeedbackClick,
                                               }) => {
   return (
     <div className={styles.wrapper}>
@@ -57,8 +62,8 @@ const OrderCard: React.FC<IOrderCardProps> = ({
           Детали заказа
         </span>
         <div className={styles.list}>
-          {items?.map(({name, price}) => (
-            <div className={styles['list-item']}>
+          {items?.map(({name, price, id}) => (
+            <div className={styles['list-item']} key={id}>
               <span>{name}</span>
               <span>{price}р</span>
             </div>
@@ -70,7 +75,16 @@ const OrderCard: React.FC<IOrderCardProps> = ({
           <span>{total}р</span>
         </div>
       </div>
-
+      {true ? (
+        <div className={styles.btn}>
+          <button onClick={() => onDeliveryAccept()}>
+            Подтвердить
+          </button>
+          <button onClick={() => onDeliveryReject()}>
+            Отвергать
+          </button>
+        </div>
+      ) : null}
     </div>
   );
 };

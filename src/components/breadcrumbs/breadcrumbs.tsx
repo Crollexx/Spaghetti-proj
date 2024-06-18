@@ -14,15 +14,28 @@ const Breadcrumbs: React.FC<IBreadcrumbsProps> = ({ values = [] }) => {
   const navigate = useNavigate()
 
   const handleNavigate = (link: string) => {
-    navigate(`/${link}`)
+    const preparedLink = ('/' + link).replace('//','/')
+    navigate(preparedLink)
   }
+  
   return (
     <div className={styles.wrapper}>
       {values.map(({ title, link}, index) => (
         index === values.length - 1 ? (
-          <span className={styles.text}>{title}</span>
+          <span
+            className={styles.text}
+            key={link ?? String(index)}
+          >
+            {title}
+          </span>
         ) : (
-          <span className={styles.text} onClick={() => handleNavigate(link)}>{title}/</span>
+          <span
+            className={styles.text}
+            onClick={() => handleNavigate(link)}
+            key={link ?? String(index)}
+          >
+            {title}/
+          </span>
         )
       )) }
     </div>

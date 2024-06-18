@@ -6,6 +6,7 @@ import {usersRoles} from "../../types/roles";
 import {useUserData} from "../../hooks/useUserData";
 import MenuIcon from "@mui/icons-material/Menu";
 import {Outlet, useNavigate} from "react-router-dom";
+import {routes} from "../../routes/routes";
 
 const Layout: React.FC = () => {
 
@@ -26,10 +27,10 @@ const Layout: React.FC = () => {
   const brigadierMenuList = [
     {
       title: 'Анкеты',
-      value: '/forms',
+      value: routes.brigadier.questionnaires,
     }, {
       title: 'Заказы',
-      value: '/orders',
+      value: routes.brigadier.orders,
     },
   ]
 

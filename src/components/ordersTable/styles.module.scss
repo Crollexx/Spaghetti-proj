@@ -1,0 +1,74 @@
+.wrapper {
+  margin: 20px 10% 10% 10%;
+
+  table {
+    width: 100%;
+    background: #F4EBDC;
+  }
+
+  table,th {
+    border: 1px solid black;
+  }
+
+  table, tr {
+    padding: 0;
+  }
+
+  th {
+    padding: 10px 0;
+    height: 50px;
+  }
+
+}
+
+.filters {
+  display: flex;
+  flex-direction: column;
+  gap:5px;
+  margin-bottom: 35px;
+  width: 20%;
+  font-family: Playfair Display,serif;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 29.33px;
+  text-align: left;
+
+  select, option {
+
+    background: #F4EBDC;
+  }
+
+
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+
+  padding: 10px 0 10px 20px !important;
+}
+
+.text {
+  width: 100px;
+}
+
+.badge {
+  font-family: Playfair Display, serif !important;
+  font-size: 10px !important;
+  font-weight: 900 !important;
+  line-height: 13.33px !important;
+  text-align: center !important;
+
+  width: 100px !important;
+  height: 28px !important;
+  padding: 0 !important;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+
+  overflow: hidden;
+}

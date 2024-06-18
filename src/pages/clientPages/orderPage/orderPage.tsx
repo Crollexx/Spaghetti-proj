@@ -26,7 +26,6 @@ const ClientOrderPage = () => {
   }
 
   useEffect(() => {
-
     if ( orderID === undefined ) {
       navigate( routes.client.orders )
     } else {
@@ -51,6 +50,8 @@ const ClientOrderPage = () => {
       {data ? (
         <OrderCard
           onFeedbackClick={() => handleAddFeedback(orderID as string)}
+          onDeliveryAccept={() => {}}
+          onDeliveryReject={() => {}}
           {...data}
         />
       ) : null}

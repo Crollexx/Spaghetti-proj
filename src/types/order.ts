@@ -29,3 +29,5 @@ export interface IOrder  {
   items: IOrderPosition[],
   total: number
 }
+
+export const orderAvailableStatuses = [orderStatuses.created, orderStatuses.cooking, orderStatuses.awaitDelivery, orderStatuses.inDelivery, orderStatuses.delivered, orderStatuses.done]

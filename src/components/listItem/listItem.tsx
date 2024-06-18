@@ -3,64 +3,61 @@ import styles from './styles.module.scss'
 import ArrowForwardIosOutlinedIcon from '@mui/icons-material/ArrowForwardIosOutlined';
 import {IconButton} from "@mui/material";
 import {useNavigate} from "react-router-dom";
-import {IOrder, orderStatuses} from "../../types/order";
 import {useUserData} from "../../hooks/useUserData";
-import {usersRoles} from "../../types/roles";
-import ListStatusBadge from "../listStatusBadge/listStatusBadge";
 
-interface IListItemProps extends IOrder {
-  orderID: number
-  showLinkButton?: boolean
-  showStatusIndicator?: boolean
+export interface IListItem {
+  itemID: string
+  link?: string
+  badge?: React.ReactNode
 }
+
+interface IListItemProps extends IListItem {}
 const ListItem: React.FC<IListItemProps> = ({
-                                              orderID,
-                                              showStatusIndicator,
-                                              feedbackNotification,
-                                              deliveryNotification,
-                                              status: orderStatuses2
+                                              itemID,
+                                              link,
+                                              badge
                                             }) => {
 
   const {userRole} = useUserData()
   const navigate = useNavigate();
   
-  const status = orderStatuses.cooking
+  const showLinkButton = link !== undefined
   
-  const showDeliveryNotification =
-    userRole === usersRoles.client && feedbackNotification
-  const showStatusNotification =
-    userRole === usersRoles.client ||
-    userRole === usersRoles.clientRepresentative ||
-    userRole === usersRoles.agent
-  const showLinkButton =
-    userRole === usersRoles.brigadier ||
-    userRole === usersRoles.client ||
-    userRole === usersRoles.agent ||
-    (
-      userRole === usersRoles.clientRepresentative && !feedbackNotification
-    )
+  // const status = orderStatuses.cooking
   
-  const handleClick = (link: number) => {
-    navigate(`${link}`)
+  // const showDeliveryNotification =
+  //   userRole === usersRoles.client && feedbackNotification
+  // const showStatusNotification =
+  //   userRole === usersRoles.client ||
+  //   userRole === usersRoles.clientRepresentative ||
+  //   userRole === usersRoles.agent
+  // const showLinkButton =
+  //   userRole === usersRoles.brigadier ||
+  //   userRole === usersRoles.client ||
+  //   userRole === usersRoles.agent ||
+  //   (
+  //     userRole === usersRoles.clientRepresentative && !feedbackNotification
+  //   )
+  
+  const handleClick = () => {
+    showLinkButton && navigate(link)
   }
   
   return (
-    <div className={styles.wrapper + ' ' + (showLinkButton ? styles.link : '')} onClick={() => handleClick(orderID)}>
+    <div
+      className={styles.wrapper + ' ' + (showLinkButton ? styles.link : '')}
+      onClick={() => handleClick()}
+      key={itemID}
+    >
       <span>
-        №{orderID}
+        №{itemID}
       </span>
       <div className={styles.icons}>
-        {showDeliveryNotification ? (
-          <>
-            </>
-        ) : null}
-        {showStatusNotification ? (
-          <ListStatusBadge status={status} />
-        ) : null}
+        {badge}
         {showLinkButton ? (
           <IconButton
             aria-haspopup="true"
-            onClick={() => handleClick(orderID)}
+            onClick={() => handleClick()}
           >
             <ArrowForwardIosOutlinedIcon/>
           </IconButton>

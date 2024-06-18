@@ -46,7 +46,7 @@ const MenuButton: React.FC<IMenuButtonProps> = ({ id, children, listData, onClic
         onClose={() => setAnchorEl(null)}
       >
         {listData?.map(({ title,value }) => (
-          <MenuItem onClick={() => handleClose(value)} id={String(value)}>
+          <MenuItem onClick={() => handleClose(value)} key={String(value)}>
             {title}
           </MenuItem>
         ))}

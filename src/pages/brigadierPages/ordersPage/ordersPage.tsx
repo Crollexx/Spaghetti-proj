@@ -1,10 +1,35 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
+import Breadcrumbs from "../../../components/breadcrumbs/breadcrumbs";
+import {routes} from "../../../routes/routes";
+import OrdersTable from "../../../components/ordersTable/ordersTable";
+import {ordersData} from "../../../fakeBackend/ordersData";
+import {IOrder, orderStatuses} from "../../../types/order";
+import {getOrders} from "../../../api/order";
 
 const BrigadierOrdersPage = () => {
+  
+  const [data, setData] = useState<IOrder[]>(ordersData)
+  
+  const handleGetData = async (): Promise<IOrder[]> => {
+    return ordersData
+  }
+  
+  useEffect(() => {
+    handleGetData().then((res) => setData(res))
+  }, [])
+  
+  const breadcrumbs = [{
+    title: 'Заказы',
+    link: routes.brigadier.orders
+  }]
+  
   return (
-    <div>
-    orders
-    </div>
+    <>
+      <Breadcrumbs values={breadcrumbs}/>
+      <OrdersTable
+        data={data}
+       />
+    </>
   );
 };
 

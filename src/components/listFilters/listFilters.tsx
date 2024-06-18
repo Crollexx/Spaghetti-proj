@@ -8,10 +8,10 @@ export interface IListFiltersProps {
 const ListFilters: React.FC<IListFiltersProps> = ({ onSelectFilter, onClearFilter }) => {
   return (
     <div className={styles.wrapper}>
-      <button onClick={() => onClearFilter()} className={styles.button}>
+      <button onClick={() => onClearFilter()} className={styles.button} key={'all'}>
         Все
       </button>
-      <button onClick={() => onSelectFilter()} className={styles.button}>
+      <button onClick={() => onSelectFilter()} className={styles.button} key={'unread'}>
         Не просмотренные
       </button>
     </div>

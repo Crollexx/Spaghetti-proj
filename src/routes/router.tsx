@@ -4,8 +4,8 @@ import {usersRoles} from "../types/roles";
 import {useUserData} from "../hooks/useUserData";
 import Layout from "../components/layout/layout";
 import BrigadierOrdersPage from "../pages/brigadierPages/ordersPage/ordersPage";
-import BrigadierFormsPage from "../pages/brigadierPages/formsPage/formsPage";
-import BrigadierFormItemPage from "../pages/brigadierPages/formItemPage/formItemPage";
+import BrigadierQuestionnairesPage from "../pages/brigadierPages/questionnairesPage/questionnairesPage";
+import BrigadierQuestionnaireItemPage from "../pages/brigadierPages/questionnairePage/questionnairePage";
 import ClientOrdersPage from "../pages/clientPages/ordersPage/ordersPage";
 import ClientOrderPage from "../pages/clientPages/orderPage/orderPage";
 import ClientOrderReviewPage from "../pages/clientPages/orderReviewPage/orderReviewPage";
@@ -86,8 +86,8 @@ const Router: React.FC = () => {
         {userRole === usersRoles.brigadier ? (
           <>
             <Route path={routes.brigadier.orders}  element={<BrigadierOrdersPage/>}/>
-            <Route path={routes.brigadier.questionnaires} index element={<BrigadierFormsPage/>} />
-            <Route path={routes.brigadier.questionnaire()} element={<BrigadierFormItemPage/>}/>
+            <Route path={routes.brigadier.questionnaires} index element={<BrigadierQuestionnairesPage/>} />
+            <Route path={routes.brigadier.questionnaire()} element={<BrigadierQuestionnaireItemPage/>}/>
 
             <Route path='*' element={<Navigate to={routes.brigadier.questionnaires}/> } />
           </>

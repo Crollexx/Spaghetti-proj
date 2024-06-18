@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {IFormData} from "../../types/form";
 import styles from './styles.module.scss'
 import {Skeleton} from "@mui/material";
@@ -10,24 +10,33 @@ const QuestionnaireCard: React.FC<IQuestionnaireCardProps> = ({
                              id = 0,
                              name= ''  ,
                              surname= '' ,
-                             birthday = '01.01.2000',
+                             birthday = '',
                              hairColor = '',
                              eyeColor= '',
                              height = 180,
                              weight = 100 ,
-                             badHabits = ['test','test','test','test','test','test','test','test','test'],
+                             badHabits = [],
                              photo,
                            }) => {
   
-  const preparedPhoto = ''
+  const [preparedPhoto, setPreparedPhoto] = useState< string>('')
   
+  const handleGetPreparedPhoto = async (url :string): Promise<string> => {
+    return ''
+  }
+  
+  useEffect(() => {
+    handleGetPreparedPhoto(photo).then((res) => {
+      setPreparedPhoto(res)
+    })
+  },[ photo])
   
   return (
     <div className={styles.wrapper}>
       <span className={styles.title}>№ {id}</span>
       <div className={styles.info}>
         {preparedPhoto ? (
-          <img src={preparedPhoto} alt='profile image' className={styles.img}/>
+          <img src={preparedPhoto} alt='profile image' className={styles.img}  />
           ) : (
           <Skeleton variant="rectangular" width={200} height={300} className={styles.placeholder} />
         )}

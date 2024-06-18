@@ -1,7 +1,7 @@
 import {IOrder, orderStatuses} from "../types/order";
 
 export const ordersData: IOrder[] = [
-  { id: 1,
+  { id: 101,
     orderDate: "2022-09-15",
     deliveryDate: "2022-09-16",
     status: orderStatuses.created,
@@ -10,7 +10,7 @@ export const ordersData: IOrder[] = [
     servingType: "Dine-in",
     paymentType: "Credit card",
     deliveryNotification: false,
-    feedbackNotification: false,
+    feedbackNotification: true,
     items: [
       {
         id: 1,
@@ -26,7 +26,7 @@ export const ordersData: IOrder[] = [
         count: 1
       } ],
     total: 25.97 },
-  { id: 2,
+  { id: 102,
     orderDate: "2022-09-16",
     deliveryDate: "2022-09-17",
     status: orderStatuses.cooking,
@@ -42,10 +42,10 @@ export const ordersData: IOrder[] = [
       price: 12.99,
       count: 1 } ],
     total: 12.99 },
-  { id: 3,
+  { id: 103,
     orderDate: "2022-09-17",
     deliveryDate: "2022-09-19",
-    status: orderStatuses.awaitDelivery,
+    status: orderStatuses.done,
     user: "Alice Johnson",
     deliveryType: "Standard",
     servingType: "Dine-in",
@@ -58,7 +58,7 @@ export const ordersData: IOrder[] = [
       price: 24.99,
       count: 1 } ],
     total: 24.99 },
-  { id: 4,
+  { id: 104,
     orderDate: "2022-09-18",
     deliveryDate: "2022-09-18",
     status: orderStatuses.inDelivery,
@@ -74,7 +74,7 @@ export const ordersData: IOrder[] = [
       price: 8.99,
       count: 1 } ],
     total: 8.99 },
-  { id: 5,
+  { id: 105,
     orderDate: "2022-09-19",
     deliveryDate: "2022-09-20",
     status: orderStatuses.delivered,

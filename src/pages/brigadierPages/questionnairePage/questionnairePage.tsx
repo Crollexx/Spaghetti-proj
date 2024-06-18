@@ -1,11 +1,13 @@
 import React, {useEffect, useState} from 'react';
-import {IFormData} from "../../../types/form";
+import styles from './styles.module.scss'
 import {useNavigate, useParams} from "react-router-dom";
-import {routes} from "../../../routes/routes";
-import Breadcrumbs from "../../../components/breadcrumbs/breadcrumbs";
+import {IFormData} from "../../../types/form";
 import QuestionnaireCard from "../../../components/questionnaireCard/questionnaireCard";
+import Breadcrumbs from "../../../components/breadcrumbs/breadcrumbs";
+import {routes} from "../../../routes/routes";
 
-const TechnologistFormPage = () => {
+const BrigadierQuestionnaireItemPage: React.FC = () => {
+  
   const [data, setData] = useState<null | IFormData>(null)
   
   const navigate = useNavigate()
@@ -31,6 +33,14 @@ const TechnologistFormPage = () => {
     return data
   }
   
+  const handleSubmit = async () => {
+    navigate('/')
+  }
+  
+  const handleReject = async () => {
+    navigate('/')
+  }
+  
   useEffect(() => {
     if ( questionnaireID === undefined ) {
       navigate('/')
@@ -44,10 +54,10 @@ const TechnologistFormPage = () => {
   const breadcrumbs = [
     {
       title: 'Анкеты',
-      link: routes.technologist.questionnaires,
+      link: routes.brigadier.questionnaires,
     }, {
       title: 'Просмотр анкеты',
-      link: routes.technologist.questionnaire(questionnaireID),
+      link: routes.brigadier.questionnaire(),
     }
   ]
   
@@ -57,9 +67,16 @@ const TechnologistFormPage = () => {
       {data ? (
         <QuestionnaireCard {...data} />
       ) : null }
+      <div className={styles.buttons}>
+        <button onClick={() => handleReject()}>
+          Отклонить
+        </button>
+        <button onClick={() => handleSubmit()}>
+          Утвердить
+        </button>
+      </div>
     </>
   );
 };
 
-
-export default TechnologistFormPage;
+export default BrigadierQuestionnaireItemPage;
