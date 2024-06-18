@@ -5,44 +5,59 @@ import StatusBadge from "../../../components/statusBadge/statusBadge";
 import {orderStatuses} from "../../../types/order";
 import Breadcrumbs from "../../../components/breadcrumbs/breadcrumbs";
 import TechnologistCard from "../../../components/technologistCard/technologistCard";
+import {IFormData} from "../../../types/form";
 
 const TechnologistMaterialSelectionPage = () => {
-  
-  const [data,setData] = useState<IListItem[]>([])
-  
-  const handleGetData = async (): Promise<IListItem[]> => {
-    const orders: IListItem[] = [
-      {
-        link: routes.client.order(101),
-        badge: <StatusBadge status={orderStatuses.delivered} type='order'/>,
-        itemID: '101'
-      },{
-        link: routes.client.order(102),
-        badge: <StatusBadge status={orderStatuses.cooking} type='order'/>,
-        itemID: '102'
-      },{
-        link: routes.client.order(103),
-        badge: <StatusBadge status={orderStatuses.done} type='order'/>,
-        itemID: '103'
-      },{
-        link: routes.client.order(104),
-        badge: <StatusBadge status={orderStatuses.created} type='order'/>,
-        itemID: '104'
-      }, {
-        link: routes.client.order(105),
-        badge: <StatusBadge status={orderStatuses.awaitDelivery} type='order'/>,
-        itemID: '105'
-      },
-    ]
-    return orders
+  const handleSave = (values: string[]) => {
+    console.log(values)
   }
   
-  useEffect(() => {
-    handleGetData().then((res) => {
-      setData(res)
-    })
-    
-  },[])
+  
+  // const [data,setData] = useState<IListItem[]>([])
+  //
+  // const handleGetData = async (): Promise<IListItem[]> => {
+  //   const questionnaire: IListItem[] = [
+  //     {
+  //       itemID: '101',
+  //       link: routes.technologist.questionnaire('101')
+  //     },{
+  //       itemID: '102',
+  //       link: routes.technologist.questionnaire('102')
+  //     },{
+  //       itemID: '103',
+  //       link: routes.technologist.questionnaire('103')
+  //     },{
+  //       itemID: '104',
+  //       link: routes.technologist.questionnaire('104')
+  //     },
+  //   ]
+  //   return questionnaire
+  // }
+  //
+  // useEffect(() => {
+  //   handleGetData().then((res) => {
+  //     setData(res)
+  //   })
+  //
+  // },[])
+  
+  const data = [{
+    id: 101,
+  },{
+    id: 102,
+  },{
+    id: 103,
+  },{
+    id: 104,
+  },{
+    id: 105,
+  }] as IFormData[]
+  
+  const filters = {
+    orderID: 101,
+    height:	[150, 190],
+    weight:	[60, 90],
+  }
   
   const breadcrumbs = [
     {
@@ -54,7 +69,12 @@ const TechnologistMaterialSelectionPage = () => {
   return (
     <>
       <Breadcrumbs values={breadcrumbs}/>
-      <TechnologistCard/>
+      <TechnologistCard
+        data={data}
+        // @ts-ignore
+        filters={filters}
+        onSubmit={handleSave}
+      />
     </>
   );
 };

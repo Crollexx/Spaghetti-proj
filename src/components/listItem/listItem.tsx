@@ -3,41 +3,24 @@ import styles from './styles.module.scss'
 import ArrowForwardIosOutlinedIcon from '@mui/icons-material/ArrowForwardIosOutlined';
 import {IconButton} from "@mui/material";
 import {useNavigate} from "react-router-dom";
-import {useUserData} from "../../hooks/useUserData";
 
 export interface IListItem {
   itemID: string
   link?: string
   badge?: React.ReactNode
+  onClick?: (itemID: string) => void
 }
 
 interface IListItemProps extends IListItem {}
 const ListItem: React.FC<IListItemProps> = ({
                                               itemID,
                                               link,
-                                              badge
+                                              badge, onClick,
                                             }) => {
 
-  const {userRole} = useUserData()
   const navigate = useNavigate();
   
   const showLinkButton = link !== undefined
-  
-  // const status = orderStatuses.cooking
-  
-  // const showDeliveryNotification =
-  //   userRole === usersRoles.client && feedbackNotification
-  // const showStatusNotification =
-  //   userRole === usersRoles.client ||
-  //   userRole === usersRoles.clientRepresentative ||
-  //   userRole === usersRoles.agent
-  // const showLinkButton =
-  //   userRole === usersRoles.brigadier ||
-  //   userRole === usersRoles.client ||
-  //   userRole === usersRoles.agent ||
-  //   (
-  //     userRole === usersRoles.clientRepresentative && !feedbackNotification
-  //   )
   
   const handleClick = () => {
     showLinkButton && navigate(link)
@@ -46,7 +29,7 @@ const ListItem: React.FC<IListItemProps> = ({
   return (
     <div
       className={styles.wrapper + ' ' + (showLinkButton ? styles.link : '')}
-      onClick={() => handleClick()}
+      onClick={() => onClick ? onClick(itemID) : handleClick()}
       key={itemID}
     >
       <span>

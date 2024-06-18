@@ -1,21 +1,30 @@
 import React from 'react';
 import styles from './styles.module.scss'
-import ListNotification, {IListNotificationProps} from "../listNotification/listNotification";
-import ListFilters, {IListFiltersProps} from "../listFilters/listFilters";
+import ListNotification from "../listNotification/listNotification";
+import ListFilters from "../listFilters/listFilters";
 import ListItem, {IListItem} from "../listItem/listItem";
 
 interface IDefaultListBaseProps {
   data: IListItem[]
   onSelectFilter?: () => void
   onClearFilter?: () => void
+  onItemClick?: (itemID: string) => void
   notificationText?: string
+  className?: string
 }
-const DefaultList: React.FC<IDefaultListBaseProps> = ({ data, notificationText, onSelectFilter, onClearFilter }) => {
+const DefaultList: React.FC<IDefaultListBaseProps> = ({
+                                                        data,
+                                                        notificationText,
+                                                        onItemClick,
+                                                        onSelectFilter,
+                                                        className = '',
+                                                        onClearFilter,
+                                                      }) => {
 
   const showNotification = !!notificationText
   const showFilters = !!onClearFilter && !!onSelectFilter
 
-  const preparedListClassName = `${styles.list} ${(data?.length > 3) ? styles.scroll : ''}`
+  const preparedListClassName = `${styles.list} ${(data?.length > 3) ? styles.scroll : ''} ${className }`
 
   return (
     <div className={styles.wrapper}>
@@ -34,6 +43,7 @@ const DefaultList: React.FC<IDefaultListBaseProps> = ({ data, notificationText, 
             itemID={itemID}
             link={link}
             badge={badge}
+            onClick={onItemClick}
           />
         ))}
       </div>
