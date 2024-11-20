@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from './styles.module.scss'
 import MenuButton from "../layoutMenuButton/menuButton";
 import ProfileButton from "../layoutProfileButton/profileButton";
@@ -13,8 +13,12 @@ const Layout: React.FC = () => {
   const navigate = useNavigate()
   const { userRole, onRoleChange } = useUserData()
 
+  const [menu, setMenu] = useState<any>([])
+
   const userSelected = userRole != null
   const isBrigadier = userSelected && userRole === usersRoles.brigadier
+
+  let dataList = []
 
   const handleNavigate = (route: string) => {
     navigate(route)
@@ -23,6 +27,8 @@ const Layout: React.FC = () => {
   // const handleChangeRole = () => {
   //
   // }
+
+
 
   const brigadierMenuList = [
     {
@@ -34,18 +40,43 @@ const Layout: React.FC = () => {
     },
   ]
 
+  const techologinstMenuList = [
+    {
+      title: 'Изготовление',
+      value: routes.technologist.production,
+    }, {
+      title: 'Заказы',
+      value: routes.technologist.orders,
+    },{
+      title: 'Анкеты',
+      value: routes.technologist.questionnaires,
+    },
+  ]
+
+  useEffect(() => {
+    switch (userRole) {
+      case usersRoles.technologist:
+        setMenu(() => techologinstMenuList)
+        break
+      case usersRoles.brigadier:
+        setMenu(() => brigadierMenuList)
+        break
+      default:
+        break
+
+    }
+  }, [userRole]);
+
   return (
     <div className={styles.wrapper}>
       <header className={styles.header}>
-        {isBrigadier ? (
-          <MenuButton
-            id='brigadierMenu'
-            listData={brigadierMenuList}
-            onClick={(route) => handleNavigate(route as string)}
-          >
-            <MenuIcon />
-          </MenuButton>
-        ) : null}
+        <MenuButton
+          id='brigadierMenu'
+          listData={menu}
+          onClick={(route) => handleNavigate(route as string)}
+        >
+          <MenuIcon />
+        </MenuButton>
         <img
           src="/logo.svg"
           alt='logo'

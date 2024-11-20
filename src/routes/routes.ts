@@ -23,7 +23,12 @@ export const routes = {
     order: (orderID?: number | string) => `${routes.agent.orders}/${orderID ?? ':orderID'}`,
   },
   technologist: {
-    questionnaires: '',
+    ingridients: 'ingridients',
+    material: 'material',
+    orders: 'orders',
+    order: (questionnaireID?: number | string) => `${routes.technologist.orders}/${questionnaireID ?? ':orderID'}`,
+    production: 'production',
+    questionnaires: 'questionnaires',
     questionnaire: (questionnaireID?: number | string) => `${routes.technologist.questionnaires}/${questionnaireID ?? ':questionnaireID'}`
   },
   courier: {

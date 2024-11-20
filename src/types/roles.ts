@@ -14,6 +14,6 @@ export enum usersLocaleRoles {
   'Бригадир' = usersRoles.brigadier,
   'Контроллер' = usersRoles.controller,
   'Агент' = usersRoles.agent,
-  'Технологист' = usersRoles.technologist,
+  'Технолог' = usersRoles.technologist,
   'Курьер' = usersRoles.courier,
 }

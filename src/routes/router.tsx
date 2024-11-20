@@ -19,6 +19,10 @@ import TechnologistFormPage from "../pages/technologistPages/formPage/formPage";
 import CourierOrdersPage from "../pages/courierPages/ordersPage/ordersPage";
 import {routes} from "./routes";
 import AgentOrderPage from "../pages/agentPages/orderPage/orderPage";
+import ProductionPage from "../pages/technologistPages/productionPage/productionPage";
+import AddIngridientsPage from "../pages/technologistPages/addIngridientsPage/addIngridientsPage";
+import GetMaterialPage from "../pages/technologistPages/getMaterialPage/getMaterialPage";
+import TechnologistOrdersPage from "../pages/technologistPages/ordersPage/ordersPage";
 
 const Router: React.FC = () => {
 
@@ -112,6 +116,14 @@ const Router: React.FC = () => {
           <>
             <Route path={routes.technologist.questionnaires} index element={<TechnologistMaterialSelectionPage/>}/>
             <Route path={routes.technologist.questionnaire()} element={<TechnologistFormPage/>}/>
+
+
+            <Route path={routes.technologist.production} element={<ProductionPage/>}/>
+            <Route path={routes.technologist.ingridients} element={<AddIngridientsPage/>}/>
+            <Route path={routes.technologist.material} element={<GetMaterialPage/>}/>
+
+            <Route path={routes.technologist.order()} index element={<AgentOrderPage/>}/>
+            <Route path={routes.technologist.orders} index element={<TechnologistOrdersPage/>}/>
 
             <Route path='*' element={<Navigate to={routes.technologist.questionnaires}/> } />
           </>

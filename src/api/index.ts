@@ -17,7 +17,10 @@ export const sendRequest = (method: string, url: string, body: {} | null = null)
     return response.json().then(error => {
       const e = new Error('Что-то пошло не так')
       // e?.data = error
-      throw e
+      // throw e
     })
+  }).catch((reason) => {
+    console.log(`re`,reason)
+    return null
   })
 }

@@ -72,3 +72,22 @@
 
   overflow: hidden;
 }
+
+.button {
+  width: 101px;
+  height: 30px;
+  gap: 0px;
+  border-radius: 20px;
+  border: none;
+
+  background: #03B2C2;
+  font-family: Playfair Display;
+  font-size: 15px;
+  font-weight: 900;
+  line-height: 20px;
+  text-align: center;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+
+
+}

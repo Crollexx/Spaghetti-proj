@@ -3,6 +3,8 @@ import styles from './styles.module.scss'
 import {IOrder, orderAvailableStatuses, orderStatuses} from "../../types/order";
 import SelectStatusBadge from "../selectStatusBadge/selectStatusBadge";
 import StatusBadge from "../statusBadge/statusBadge";
+import {usersRoles} from "../../types/roles";
+import {useUserData} from "../../hooks/useUserData";
 
 interface IOrdersTableProps {
   data: IOrder[]
@@ -10,15 +12,19 @@ interface IOrdersTableProps {
   updateStatusAvailable?: boolean
   onFilter?: (value: orderStatuses) => void
   onUpdateStatus?: (value: orderStatuses, id: number) => void
+  onClick?: ( id: number) => void
 }
 
 const OrdersTable:React.FC<IOrdersTableProps> = ({
                                                    data,
                                                    showFilters = false ,
-                                                   onFilter = () => {} ,
-                                                   onUpdateStatus = () => {},
+                                                   onFilter ,
+                                                   onUpdateStatus ,
+                                                   onClick,
   updateStatusAvailable,
                                                  }) => {
+
+  const {userRole, onRoleChange} = useUserData()
   const getOrderText = (status: orderStatuses) => {
     switch (status) {
       case orderStatuses.created:
@@ -78,6 +84,11 @@ const OrdersTable:React.FC<IOrdersTableProps> = ({
           <th>
             Ответственный
           </th>
+          { userRole === usersRoles.technologist ? (
+            <th>
+              К заказу
+            </th>
+          ) : null}
         </tr>
         </thead>
         <tbody>
@@ -125,6 +136,13 @@ const OrdersTable:React.FC<IOrdersTableProps> = ({
             <th>
               {user}
             </th>
+            { userRole === usersRoles.technologist ? (
+              <th>
+                <button className={styles.button} onClick={() => onClick && onClick(id)}>
+                  Перейти
+                </button>
+              </th>
+            ) : null}
           </tr>
         ))}
         
