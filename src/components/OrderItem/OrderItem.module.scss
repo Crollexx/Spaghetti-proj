@@ -1,0 +1,42 @@
+.orderItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background-color: #f8f0dc; // Цвет фона для каждого блока заказа
+  border: 1px solid #d5d5d5; // Граница вокруг заказа
+  border-radius: 5px; // Слегка закругленные углы
+  margin-bottom: 15px; // Расстояние между элементами
+
+  &:hover {
+    background-color: #e6eed5; // Цвет фона при наведении
+    cursor: pointer;
+  }
+
+  span {
+    font-size: 18px; // Размер шрифта для номера заказа
+    font-weight: bold; // Жирный текст для номера заказа
+    color: #000; // Черный цвет текста
+  }
+
+  .processButton {
+    background-color: #f7a900; // Ярко-оранжевый цвет кнопки
+    color: #fff; // Белый цвет текста
+    border: none; // Без рамки
+    border-radius: 10px; // Закругленные края кнопки
+    padding: 10px 20px; // Внутренние отступы
+    font-size: 16px; // Размер текста кнопки
+    font-weight: bold; // Жирный текст кнопки
+    text-align: center; // Выравнивание текста
+    cursor: pointer; // Курсор "рука" при наведении
+
+    &:hover {
+      background-color: #d98a00; // Более темный оранжевый цвет при наведении
+    }
+
+    &:focus {
+      outline: none; // Убираем стандартное обводку
+      box-shadow: 0 0 4px #f7a900; // Добавляем тень при фокусе
+    }
+  }
+}

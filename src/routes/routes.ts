@@ -7,6 +7,9 @@ export const routes = {
   },
   clientRepresentative: {
     orders: '',
+    orderList: 'orderList',
+    ordersConfirm: 'ordersConfirm',
+    order: (orderID?: number | string) => `${routes.clientRepresentative.orderList}/${orderID ?? ':orderID'}`, 
     feedback: (orderID?: number | string) => `${routes.clientRepresentative.orders}/${orderID ?? ':orderID'}`
   },
   brigadier: {

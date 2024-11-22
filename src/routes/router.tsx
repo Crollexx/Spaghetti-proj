@@ -23,7 +23,9 @@ import ProductionPage from "../pages/technologistPages/productionPage/production
 import AddIngridientsPage from "../pages/technologistPages/addIngridientsPage/addIngridientsPage";
 import GetMaterialPage from "../pages/technologistPages/getMaterialPage/getMaterialPage";
 import TechnologistOrdersPage from "../pages/technologistPages/ordersPage/ordersPage";
-
+import OrderListPage from "../pages/clientRepresentativePages/OrderListPage/OrderListPage";
+import OrderDetailsPage from "../pages/clientRepresentativePages/OrderDetailsPage/OrderDetailsPage";
+import ClientRepresentativeOrderConfirmedPage from "../pages/clientRepresentativePages/orderConfirmedPage/orderConfirmedPage";
 const Router: React.FC = () => {
 
   const { userRole } = useUserData()
@@ -81,8 +83,11 @@ const Router: React.FC = () => {
         ) : null}
         {userRole === usersRoles.clientRepresentative ? (
           <>
-            <Route path={routes.clientRepresentative.orders} index element={<ClientRepresentativeOrderReviewPage/>}/>
+            <Route path={routes.clientRepresentative.orderList} index element={<ClientRepresentativeOrderReviewPage/>}/>
             <Route path={routes.clientRepresentative.feedback()} element={<ClientRepresentativeOrderPage/>}/>
+            <Route path={routes.clientRepresentative.orders} index element={<OrderListPage />}/>    
+            <Route path={routes.clientRepresentative.order()} element={<OrderDetailsPage />}/>
+            <Route path={routes.clientRepresentative.ordersConfirm} index element={<ClientRepresentativeOrderConfirmedPage />} />
 
             <Route path='*' element={<Navigate to={routes.clientRepresentative.orders}/> } />
           </>
