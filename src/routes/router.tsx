@@ -26,6 +26,10 @@ import TechnologistOrdersPage from "../pages/technologistPages/ordersPage/orders
 import OrderListPage from "../pages/clientRepresentativePages/OrderListPage/OrderListPage";
 import OrderDetailsPage from "../pages/clientRepresentativePages/OrderDetailsPage/OrderDetailsPage";
 import ClientRepresentativeOrderConfirmedPage from "../pages/clientRepresentativePages/orderConfirmedPage/orderConfirmedPage";
+import ClientOffersPage from "../pages/clientPages/offersPage/offersPage";
+import ClientNewOrderPage from "../pages/clientPages/newOrderPage/newOrderPage";
+import ClientEditOrderPage from "../pages/clientPages/orderEditPage/orderPage";
+import TechnologistOrderPage from "../pages/technologistPages/orderPage/orderPage";
 const Router: React.FC = () => {
 
   const { userRole } = useUserData()
@@ -76,7 +80,10 @@ const Router: React.FC = () => {
           <>
             <Route path={routes.client.orders} index element={<ClientOrdersPage/>}/>
             <Route path={routes.client.order()} element={<ClientOrderPage/>}/>
+            <Route path={routes.client.orderEdit()} element={<ClientEditOrderPage/>}/>
             <Route path={routes.client.feedback() } element={<ClientOrderReviewPage/>}/>
+            <Route path={routes.client.offers } element={<ClientOffersPage/>}/>
+            <Route path={routes.client.newOrder } element={<ClientNewOrderPage/>}/>
 
             <Route path='*' element={<Navigate to={routes.client.orders}/> } />
           </>
@@ -127,7 +134,7 @@ const Router: React.FC = () => {
             <Route path={routes.technologist.ingridients} element={<AddIngridientsPage/>}/>
             <Route path={routes.technologist.material} element={<GetMaterialPage/>}/>
 
-            <Route path={routes.technologist.order()} index element={<AgentOrderPage/>}/>
+            <Route path={routes.technologist.order()} index element={<TechnologistOrderPage/>}/>
             <Route path={routes.technologist.orders} index element={<TechnologistOrdersPage/>}/>
 
             <Route path='*' element={<Navigate to={routes.technologist.questionnaires}/> } />

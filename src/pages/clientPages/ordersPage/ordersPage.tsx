@@ -21,7 +21,9 @@ const ClientOrdersPage = () => {
     
     return  data?.map(({ id, status,}) => ({
       link: routes.client.order(id),
-      badge: <StatusBadge status={status} type='order'/>,
+      badge: <>
+        <StatusBadge status={status} type='order'/>
+      </>,
       itemID: id
     }))
   }

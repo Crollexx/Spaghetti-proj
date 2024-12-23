@@ -1,4 +1,4 @@
-const baseUrl = 'http://84.38.189.195:55971/api/v1'
+const baseUrl = 'https://app.mermakov.info/api/v1'
 
 export const sendRequest = (method: string, url: string, body: {} | null = null) =>  {
   const headers = {

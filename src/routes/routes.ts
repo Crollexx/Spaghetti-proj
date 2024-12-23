@@ -3,7 +3,10 @@ export const routes = {
   client: {
     orders: '',
     order: (orderID?: number | string) => `${routes.client.orders}/${orderID ?? ':orderID'}`,
-    feedback: (orderID?: number | string) => `${routes.client.order(orderID)}/feedback`
+    orderEdit: (orderID?: number | string) => `${routes.client.orders}/${orderID ?? ':orderID'}/edit`,
+    feedback: (orderID?: number | string) => `${routes.client.order(orderID)}/feedback`,
+    offers: 'offers',
+    newOrder: 'new-order',
   },
   clientRepresentative: {
     orders: '',

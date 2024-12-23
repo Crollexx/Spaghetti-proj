@@ -1,11 +1,17 @@
 import React from 'react';
 import styles from './styles.module.scss'
-import {IOrder} from "../../types/order";
+import {IOrder, IOrderStatuses, orderStatuses} from "../../types/order";
+import {useUserData} from "../../hooks/useUserData";
+import {usersRoles} from "../../types/roles";
 
 interface IOrderCardProps extends IOrder {
   onFeedbackClick?: () => void;
   onDeliveryAccept?: () => void
   onDeliveryReject?: () => void
+  editAvailable?: boolean
+  onEditAddCLick?: () => void
+  onEditPaymentCLick?: () => void
+  onEditDeliveryCLick?: () => void
 }
 
 const OrderCard: React.FC<IOrderCardProps> = ({
@@ -17,11 +23,18 @@ const OrderCard: React.FC<IOrderCardProps> = ({
                                                 deliveryType,
                                                 paymentType,
                                                 feedbackNotification,
+  status,
                                                 deliveryNotification,
+  editAvailable = false,
                                                 onDeliveryAccept = () => {},
                                                 onDeliveryReject = () => {},
                                                 onFeedbackClick = () => {},
+                                                onEditAddCLick = () => {},
+                                                onEditPaymentCLick = () => {},
+                                                onEditDeliveryCLick = () => {},
                                               }) => {
+  const { userRole, onRoleChange } = useUserData()
+
   return (
     <div className={styles.wrapper}>
       <span className={styles.title}>
@@ -75,13 +88,26 @@ const OrderCard: React.FC<IOrderCardProps> = ({
           <span>{total}р</span>
         </div>
       </div>
-      {deliveryNotification ? (
+      {(status === orderStatuses.delivered && userRole === usersRoles.client) ? (
         <div className={styles.btn}>
           <button onClick={() => onDeliveryAccept()}>
             Подтвердить
           </button>
           <button onClick={() => onDeliveryReject()}>
             Отвергать
+          </button>
+        </div>
+      ) : null}
+      {(status === orderStatuses.created && userRole === usersRoles.client) ? (
+        <div className={styles.btn}>
+          <button onClick={() => onEditAddCLick()}>
+            Добавить товар
+          </button>
+          <button onClick={() => onEditDeliveryCLick()}>
+            Изменить способ получения
+          </button>
+          <button onClick={() => onEditPaymentCLick()}>
+            Изменить данные для оплаты
           </button>
         </div>
       ) : null}

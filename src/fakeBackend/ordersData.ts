@@ -91,3 +91,42 @@ export const ordersData: IOrder[] = [
       count: 1 } ],
     total: 6.99 },
 ];
+
+export const offersData = [
+  {
+    id: 1,
+    name: "Шестеренкоголовый",
+    description: "string",
+    price: 200,
+    photoId: 1,
+    image: 'https://s3-alpha-sig.figma.com/img/53b6/64c7/462158667961c5b4197fe22b15664ec7?Expires=1735516800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=NluqxeE7aTr8saYovXlt9qIyFueVOHjgiyLqPnAOu8ZacBEyn6iUFqwgp-Rly329ipIQmREyumrtVIlt~SXcELWA~Y2N8w74XQ3JgfpPcpyOHRW-aXdLx0VZ5deYg0ozLhgO9PvBHs2L0b~zSRFERoI04bkFTLMapH0cfRkeBxvPxu6AZ5hz-tHSf3sCzc3VpSyb5goHFtniaZJs3fBjB918fVDievJ01eMKB0CFQEjSdT0lNhLEVXjbfefRRPDKPZcPPbqfKHmxk4J9gjO-DW9YMHdxYdHX8nhtQVIMKMFsHG-sYg8O8BPyagoE0A0y6--VbDMgN7fQuke3qtGPPA__',
+
+  },
+  {
+    id: 2,
+    name: "Шлимипантс",
+    description: "string",
+    price: 200,
+    photoId: 2,
+    image: 'https://s3-alpha-sig.figma.com/img/1163/3eba/4e45eb5a68455cab372f7e294af32aed?Expires=1735516800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=M9Uwm4xRb4v7yVeHQUnMXVXjsePgx6Nv4OFVLQTnr7K02mgB~9glOE0W1o~joeNnTh1o9XC6Ha7ZXdyovgH74TNDz2q5OeG0x~L1eLlF9V3xGzPiagHPH4rS-8HTOGFxhFpyACFstub3dP~6xw4MTwzsa9GN1HPVDHEJe3MAH~ApIIm~Jka7Awn3c~wf8FTDahvv0BRwjntcSAZ17kb84WzXiaL5hl0ZkPfZqU2DlF2R0z5pmK4y8bFUv7ajZhrOGJ--J9CyoTLKgpHwG~IMYlZg7mEWo3BsTPyHHZoCE25NqfNWiqhZIwwmOMvdm-PU5BZQikXasKOKm20gloGYFg__',
+
+  },
+  {
+    id: 3,
+    name: "Гленн",
+    description: "string",
+    price: 200,
+    photoId: 3,
+    image: 'https://s3-alpha-sig.figma.com/img/a15a/fd89/5540d26e8e52856a16cdedadb5c46f13?Expires=1735516800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=FmOUfv2ortlzZqshU6n9xL-XKv6bW924KNmi6cnh4OcqAigtn3ci0V-WWG89aZxIUZfY2WNAwNVvhc5zpPBvQiCxzKs6U5jyh47~uPoqgPOfXFB9983YNhHr6aDvpPH52uBT8c3tfz732pvJrN90LVZd~LlYe0-iNfJyUlhKVlY1rONqrXxAVJh5wdM4MLizfHqsCi~78pe96UhskKdqlJFOPD8qPbof0QWBv92ZLl7g4q315llIEiMa1jvMJJddv1iYDEryNMTkXzS6AcnsObToqmpvjJD~nNi46ynWYliTbydWvZyzC89MATWBUhsUC-Rbkg91-IVDzQsicS7r8w__',
+
+  },
+  {
+    id: 4,
+    name: "Жопасранчик",
+    description: "string",
+    price: 200,
+    photoId: 4,
+    image: 'https://s3-alpha-sig.figma.com/img/dda5/58dd/0ab13d09c42b33eb8ffc84069b1dd03c?Expires=1735516800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=i3l5D0w2ayjWAw0TIjeRq1-W33RQ4b3V~Xw2UvNm9cs1fCfM~WSUOjmnqBctw0p8JCmfypdvePrKzIWTJuroyL0MFTs8HkXMS5vsp9msDMr21qxf-h2Wmfl-RZZCewOASJX8Kh6M7bsK5ikzZV5k3bwj4trxLYNELzrf7G7wz9S7xQE~2uKMcnHhyLBTPwlrpKaA0BJ1SP0arfNhoc8~dqN~oexmulcfFW0OI83AwDa-yNn~nLVgkDuaQ6P2QSNW9dlWudWvaAHmaVsU3pwWRmLdMOle7Qk0SbWt8FDvo3ED-NacJ9tqjWJfMWpB6CEX9urMSeQIHDVNF8i4oWrSQg__',
+
+  },
+]

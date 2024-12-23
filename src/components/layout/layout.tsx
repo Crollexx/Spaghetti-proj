@@ -53,6 +53,16 @@ const Layout: React.FC = () => {
     },
   ]
 
+  const clientMenuList = [
+    {
+      title: 'Заказы',
+      value: routes.client.orders,
+    }, {
+      title: 'Предложения',
+      value: routes.client.offers,
+    },
+  ]
+
   useEffect(() => {
     switch (userRole) {
       case usersRoles.technologist:
@@ -61,7 +71,11 @@ const Layout: React.FC = () => {
       case usersRoles.brigadier:
         setMenu(() => brigadierMenuList)
         break
+      case usersRoles.client:
+        setMenu(() => clientMenuList)
+        break
       default:
+        setMenu(() => [])
         break
 
     }

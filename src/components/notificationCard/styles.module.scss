@@ -1,0 +1,42 @@
+.container {
+  position: absolute;
+  right: 50px;
+  top: 50px;
+}
+
+.content {
+  width: 400px;
+  height: 120px;
+  border-radius: 20px;
+  border: 3px solid #000000;
+  background: #CDE18F;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.text {
+   font-family: Playfair Display, serif;
+   font-size: 24px;
+   font-weight: 500;
+   line-height: 31.99px;
+   text-align: left;
+   text-underline-position: from-font;
+   text-decoration-skip-ink: none;
+
+  margin-left: 40px;
+}
+
+.error {
+  color: #F20808 !important;
+}
+
+.icon {
+  margin-right: auto;
+  margin-bottom: auto;
+  position: absolute;
+  left: 10px;
+  top: 15px;
+}

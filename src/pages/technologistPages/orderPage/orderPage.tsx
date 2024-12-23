@@ -5,6 +5,7 @@ import {useNavigate, useParams} from "react-router-dom";
 import OrderCard from "../../../components/orderCard/orderCard";
 import {IOrder} from "../../../types/order";
 import {getOrder} from "../../../api/order";
+import DefaultButton from "../../../components/button/button";
 
 const TechnologistOrderPage = () => {
   
@@ -36,6 +37,10 @@ const TechnologistOrderPage = () => {
       link: routes.technologist.order(orderID),
     }
   ]
+
+  const handleClick = (data: any) => {
+    navigate( '/'+routes.technologist.orders)
+  }
   
   
   return (
@@ -44,6 +49,10 @@ const TechnologistOrderPage = () => {
       {data ? (
         <OrderCard {...data} feedbackNotification={false}/>
       ) : null}
+      <DefaultButton
+        onClick={() => handleClick(data)}
+        text={ data?.status === 'COOKING' ? 'Завершить приготовление': 'Начать приготовление'}
+      />
     </>
   );
 };
