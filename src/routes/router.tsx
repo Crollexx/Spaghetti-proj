@@ -30,6 +30,7 @@ import ClientOffersPage from "../pages/clientPages/offersPage/offersPage";
 import ClientNewOrderPage from "../pages/clientPages/newOrderPage/newOrderPage";
 import ClientEditOrderPage from "../pages/clientPages/orderEditPage/orderPage";
 import TechnologistOrderPage from "../pages/technologistPages/orderPage/orderPage";
+import HomePage from '../pages/homePages/homePage';
 const Router: React.FC = () => {
 
   const { userRole } = useUserData()
@@ -76,6 +77,7 @@ const Router: React.FC = () => {
     // <RouterProvider router={router} />
     <Routes>
       <Route path={routes.default} element={<Layout/>}>
+        <Route index element={<HomePage/>}/>
         {userRole === usersRoles.client ? (
           <>
             <Route path={routes.client.orders} index element={<ClientOrdersPage/>}/>

@@ -1,0 +1,44 @@
+
+
+.menu {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 50px; 
+    margin-top: 50px;
+    align-items: start; 
+    justify-items: center; 
+  }
+  
+  .title {
+    display: flex;
+    font-size: 30px;
+    font-weight: bold;
+    text-align: left;
+    margin-bottom: 70px;
+    padding-left: 5%;
+  }
+  
+  .menuButton {
+    background-color: #F4EBDC; 
+    border: none; 
+    border-radius: 25px; 
+    padding: 10px; 
+    font-size: 30px;
+    font-weight: 600; 
+    
+    text-align: center;
+    
+    width: 80%; 
+    height: 74px; 
+  
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+  
+   
+  }
+  
+  
+  
+ 
+  

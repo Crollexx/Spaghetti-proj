@@ -1,32 +1,32 @@
 export const routes = {
   default: '/',
   client: {
-    orders: '',
-    order: (orderID?: number | string) => `${routes.client.orders}/${orderID ?? ':orderID'}`,
-    orderEdit: (orderID?: number | string) => `${routes.client.orders}/${orderID ?? ':orderID'}/edit`,
+    orders: 'orders',
+    order: (orderID?: number | string) => `/${orderID ?? ':orderID'}`,
+    orderEdit: (orderID?: number | string) => `/${orderID ?? ':orderID'}/edit`,
     feedback: (orderID?: number | string) => `${routes.client.order(orderID)}/feedback`,
     offers: 'offers',
     newOrder: 'new-order',
   },
   clientRepresentative: {
-    orders: '',
+    orders: 'orders',
     orderList: 'orderList',
     ordersConfirm: 'ordersConfirm',
     order: (orderID?: number | string) => `${routes.clientRepresentative.orderList}/${orderID ?? ':orderID'}`, 
-    feedback: (orderID?: number | string) => `${routes.clientRepresentative.orders}/${orderID ?? ':orderID'}`
+    feedback: (orderID?: number | string) => `/${orderID ?? ':orderID'}`
   },
   brigadier: {
     orders: 'orders',
-    questionnaires: '',
-    questionnaire: (questionnaireID?: number | string) => `${routes.brigadier.questionnaires}/${questionnaireID ?? ':questionnaireID'}`
+    questionnaires: 'questionnaires',
+    questionnaire: (questionnaireID?: number | string) => `/${questionnaireID ?? ':questionnaireID'}`
   },
   controller: {
-    feedbackList: '',
-    feedback: (orderID?: number | string) => `${routes.controller.feedbackList}/${orderID ?? ':orderID'}`,
+    feedbackList: 'feedbackList',
+    feedback: (orderID?: number | string) => `/${orderID ?? ':orderID'}`,
   },
   agent: {
-    orders: '',
-    order: (orderID?: number | string) => `${routes.agent.orders}/${orderID ?? ':orderID'}`,
+    orders: 'orders',
+    order: (orderID?: number | string) => `/${orderID ?? ':orderID'}`,
   },
   technologist: {
     ingridients: 'ingridients',
@@ -38,7 +38,7 @@ export const routes = {
     questionnaire: (questionnaireID?: number | string) => `${routes.technologist.questionnaires}/${questionnaireID ?? ':questionnaireID'}`
   },
   courier: {
-    orders: ''
+    orders: 'orders'
   }
 }
 

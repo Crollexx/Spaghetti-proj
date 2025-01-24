@@ -1,11 +1,11 @@
 export enum usersRoles {
-  client = 0,
-  clientRepresentative = 1,
-  brigadier = 2,
-  controller = 3,
-  agent = 4,
-  technologist = 5,
-  courier = 6,
+  client = 1,
+  clientRepresentative = 2,
+  brigadier = 3,
+  controller = 4,
+  agent = 5,
+  technologist = 6,
+  courier = 7,
 }
 
 export enum usersLocaleRoles {
